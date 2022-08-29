@@ -1,4 +1,11 @@
 class Section < ApplicationRecord
+  CATEGORY_HEADERS = {
+    "instance_method" => "Instance Methods",
+    "class_method" => "Class Methods",
+    "included_module" => "Included Modules",
+    "inherits_from_parent" => "Parent"
+  }
+
   belongs_to :klass
 
   validates :name, presence: true
