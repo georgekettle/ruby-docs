@@ -1,6 +1,4 @@
 class KlassesController < ApplicationController
-  layout "blank", :only => [ :show ]
-
   def show
     @version = Version.find_by_number(params[:version_id])
     @klass = Klass.find_by(name: klass_name, version: @version)
