@@ -7,19 +7,20 @@
     </div>
     <ul class="overflow-scroll h-full">
       <% Section.categories.keys.reverse.each do |cat| %>
-        <%= render 'sections/section_category', klass: @klass, category: cat %>
+        <%= render 'section_category', klass: @klass, category: cat %>
       <% end %>
     </ul>
   </div>
   <div class="w-full md:w-2/3 lg:w-3/4 p-4">
     <header id="header" class="relative z-20">
       <div>
-        <p class="mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400">Getting started</p>
+        <p class="mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400"><%= @section.category_header&.capitalize %></p>
         <div class="flex items-center">
-          <h1 class="inline-block text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight dark:text-slate-200"><%= @klass.name %></h1>
+          <h1 class="inline-block text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight dark:text-slate-200"><%= @section.formatted_name %></h1>
         </div>
       </div>
       <p class="mt-2 text-lg text-slate-700 dark:text-slate-400">Condensed explanation to give an idea</p>
     </header>
+    <p><%= @section.explanation %></p>
   </div>
 </div>
