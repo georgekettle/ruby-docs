@@ -1,6 +1,6 @@
 class SectionsController < ApplicationController
   def show
-    @version = Version.find_by_number(params[:version_id])
+    @version = Version.find_by_number(params[:version_number])
     @klass = Klass.find_by(name: klass_name, version: @version)
     @section = Section.find_by(name: section_name, klass: @klass)
   end

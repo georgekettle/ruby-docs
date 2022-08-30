@@ -1,6 +1,6 @@
 class KlassesController < ApplicationController
   def show
-    @version = Version.find_by_number(params[:version_id])
+    @version = Version.find_by_number(params[:version_number])
     @klass = Klass.find_by(name: klass_name, version: @version)
   end
 
