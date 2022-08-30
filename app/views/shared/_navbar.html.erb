@@ -17,24 +17,11 @@
             <div class="relative hidden lg:flex items-center ml-auto">
                <nav class="text-sm leading-6 font-semibold text-slate-700 dark:text-slate-200">
                   <ul class="flex space-x-8">
-                     <li>
-                        <a class="hover:text-primary-500 dark:hover:text-primary-400" href="/docs/installation">
-                        Docs
-                        </a>
-                     </li>
-                     <li>
-                        <a href="https://tailwindui.com/?ref=top" class="hover:text-primary-500 dark:hover:text-primary-400">
-                        Components
-                        </a>
-                     </li>
-                     <li>
-                        <a class="hover:text-primary-500 dark:hover:text-primary-400" href="/blog">Blog</a>
-                     </li>
-                     <li>
-                        <a class="hover:text-primary-500 dark:hover:text-primary-400" href="https://jobs.tailwindcss.com/?ref=top">
-                        Jobs
-                        <span class="ml-2 font-medium text-xs leading-5 rounded-full text-primary-600 bg-primary-400/10 px-2 py-0.5  dark:text-primary-400">New</span></a>
-                     </li>
+                    <% Current.version.klasses.each do |klass| %>
+                      <li>
+                        <%= link_to klass.name, klass_path(klass), class: "hover:text-primary-500 dark:hover:text-primary-400" %>
+                      </li>
+                    <% end %>
                   </ul>
                </nav>
                <div class="flex items-center border-l border-slate-200 ml-6 pl-6 dark:border-slate-800">

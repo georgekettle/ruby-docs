@@ -1,7 +1,7 @@
 <div class="flex">
   <div class="hidden md:block md:w-1/3 lg:w-1/4 p-4 pt-16 h-screen relative">
     <div class="absolute top-0 left-0 bg-white p-4 w-full">
-      <%= link_to klass_path(@klass.version.number, @klass.name) do %>
+      <%= link_to klass_path(@klass) do %>
         <h2 class="text-lg font-semibold"><%= @klass.name %></h2>
       <% end %>
     </div>

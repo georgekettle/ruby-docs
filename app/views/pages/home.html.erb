@@ -24,7 +24,7 @@
     <h2 class="text-xl mb-4 font-extrabold tracking-tight opacity-20">Documentation</h2>
     <div class="grid gap-4 grid-cols-2 grid-rows-3">
       <% @klasses.each do |klass| %>
-        <%= link_to klass_path(klass.version.number, klass.name), class: "w-full inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800" do %>
+        <%= link_to klass_path(klass), class: "w-full inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800" do %>
           <%= klass.name %>
         <% end %>
       <% end %>
