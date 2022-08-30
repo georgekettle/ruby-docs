@@ -19,7 +19,11 @@
                   <ul class="flex space-x-8">
                     <% Current.version.klasses.each do |klass| %>
                       <li>
-                        <%= link_to klass.name, klass_path(klass), class: "hover:text-primary-500 dark:hover:text-primary-400" %>
+                        <% if klass.name == params[:klass_name] %>
+                          <%= link_to klass.name, klass_path(klass), class: "text-primary-500 dark:text-primary-400" %>
+                        <% else %>
+                          <%= link_to klass.name, klass_path(klass), class: "hover:text-primary-500 dark:hover:text-primary-400" %>
+                        <% end %>
                       </li>
                     <% end %>
                   </ul>
