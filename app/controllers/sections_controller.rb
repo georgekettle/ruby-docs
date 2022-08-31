@@ -1,4 +1,6 @@
 class SectionsController < ApplicationController
+  layout "documentation", only: [:show]
+
   def show
     @version = Version.find_by_number(params[:version_number])
     @klass = Klass.find_by(name: klass_name, version: @version)

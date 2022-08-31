@@ -24,6 +24,9 @@ module.exports = {
           '800': '#a02214',
           '900': '#842318',
         }
+      },
+      maxWidth: {
+        '8xl': '90rem',
       }
     },
     fontFamily: {
