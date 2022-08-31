@@ -4,7 +4,8 @@
         <div class="relative flex items-center">
           <%= link_to root_path, class: "mr-3 flex items-center w-[2.0625rem] overflow-hidden md:w-auto" do %>
             <%= image_tag 'logo.svg', alt: 'Ruby Newbie homepage', class: "h-6" %>
-            <%= image_tag 'logo-text.svg', alt: 'Ruby Newbie homepage', class: "h-6 ml-2" %>
+            <%= image_tag 'logo-text.svg', alt: 'Ruby Newbie homepage', class: "h-6 ml-2 dark:hidden" %>
+            <%= image_tag 'logo-text-dark.svg', alt: 'Ruby Newbie homepage', class: "h-6 ml-2 hidden dark:inline-block" %>
           <% end %>
           <%= render "shared/navbar/dropdown" %>
           <div class="relative hidden lg:flex items-center ml-auto">
@@ -22,8 +23,8 @@
                 </ul>
               </nav>
               <div class="flex items-center border-l border-slate-200 ml-6 pl-6 dark:border-slate-800">
-                <label class="sr-only" id="headlessui-listbox-label-3">Theme</label>
-                <button type="button" id="headlessui-listbox-button-4" aria-haspopup="true" aria-expanded="false" aria-labelledby="headlessui-listbox-label-3 headlessui-listbox-button-undefined">
+                <label class="sr-only">Theme</label>
+                <button type="button" data-controller="dark" data-action="click->dark#toggle">
                     <span class="dark:hidden">
                       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
                           <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" class="fill-primary-400/20 stroke-primary-500"></path>
