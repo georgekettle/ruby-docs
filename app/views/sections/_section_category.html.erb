@@ -1,11 +1,10 @@
-
 <li class="mt-12 lg:mt-8">
   <h3 class="mb-8 lg:mb-3 font-semibold text-slate-900 dark:text-slate-200"><%= Section::CATEGORY_HEADERS[category] %></h3>
   <ul class="space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800">
     <% klass.sections.where(category: category).each do |section| %>
       <% section_classes = params[:section_name] == section.name ? "block border-l pl-4 -ml-px text-primary-500 border-current font-semibold dark:text-primary-400" : "block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300" %>
       <li>
-        <%= link_to section_path(@klass.version.number, @klass.name, section.name), class: section_classes do %>
+        <%= link_to section_path(klass.version.number, klass.name, section.name), class: section_classes do %>
           <% if section.instance_method? %>
             <span>#</span>
           <% elsif section.class_method? %>

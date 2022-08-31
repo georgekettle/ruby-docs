@@ -1,10 +1,5 @@
 <% content_for :side_nav do %>
-  <%= render 'components/side_nav_search' %>
-  <ul class="overflow-scroll h-full">
-    <% Section.categories.keys.reverse.each do |cat| %>
-      <%= render 'sections/section_category', klass: @klass, category: cat %>
-    <% end %>
-  </ul>
+  <%= render "components/documentation/side_nav" %>
 <% end %>
 
 <div class="p-4">
