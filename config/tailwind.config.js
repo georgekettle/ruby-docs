@@ -27,6 +27,9 @@ module.exports = {
       },
       maxWidth: {
         '8xl': '90rem',
+      },
+      spacing: {
+        '1px': '1px',
       }
     },
     fontFamily: {
