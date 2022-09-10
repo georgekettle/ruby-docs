@@ -1,0 +1,50 @@
+<div data-controller="portal">
+  <button data-action="click->portal#open" type="button" class="text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300">
+    <span class="sr-only">Navigation</span>
+    <svg width="24" height="24">
+        <path d="M5 6h14M5 12h14M5 18h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+  <div data-portal-target="container" class="hidden">
+    <div class="fixed z-50 inset-0 overflow-y-auto lg:hidden" id="headlessui-dialog-27" role="dialog" aria-modal="true">
+      <div data-action="click->portal#close" class="fixed inset-0 bg-black/20 backdrop-blur-sm dark:bg-slate-900/80" id="headlessui-dialog-overlay-43" aria-hidden="true"></div>
+      <div class="relative bg-white w-80 max-w-[calc(100%-3rem)] p-6 dark:bg-slate-800">
+          <button data-action="click->portal#close" type="button" class="absolute z-10 top-5 right-5 w-8 h-8 flex items-center justify-center text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300" tabindex="0">
+            <span class="sr-only">Close navigation</span>
+            <svg viewBox="0 0 10 10" class="w-2.5 h-2.5 overflow-visible">
+                <path d="M0 0L10 10M10 0L0 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+          </button>
+          <nav id="nav" class="lg:text-sm lg:leading-6 relative">
+            <div class="sticky top-0 -ml-0.5 pointer-events-none">
+                <div class="bg-white dark:bg-slate-900 relative pointer-events-auto">
+                  <button type="button" class="hidden w-full lg:flex items-center text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 hover:ring-slate-300 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700">
+                      <svg width="24" height="24" fill="none" aria-hidden="true" class="mr-3 flex-none">
+                        <path d="m19 19-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle>
+                      </svg>
+                      Quick search...<span class="ml-auto pl-3 flex-none text-xs font-semibold">⌘K</span>
+                  </button>
+                </div>
+            </div>
+            <ul>
+              <% Current.version.klasses.each do |klass| %>
+                <li>
+                  <%= link_to klass_path(klass), class: "group flex items-center lg:text-sm lg:leading-6 mb-4 font-medium text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300" do %>
+                    <div class="mr-4 rounded-md ring-1 ring-slate-900/5 shadow-sm group-hover:shadow group-hover:ring-slate-900/10 dark:ring-0 dark:shadow-none dark:group-hover:shadow-none dark:group-hover:highlight-white/10 group-hover:shadow-indigo-200 dark:group-hover:bg-indigo-500 dark:bg-slate-700 dark:highlight-white/5">
+                      <%= image_tag "#{klass.name&.downcase}.svg", class:"h-6 w-6" %>
+                    </div>
+                    <%= klass.name %>
+                  <% end %>
+                </li>
+              <% end %>
+                
+              <% Section.categories.keys.reverse.each do |cat| %>
+                <%= render 'sections/section_category', klass: @klass, category: cat %>
+              <% end %>
+            </ul>
+          </nav>
+      </div>
+    </div>
+  </div>
+</div>
