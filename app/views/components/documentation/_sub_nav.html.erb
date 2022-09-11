@@ -1,12 +1,4 @@
 <div class="flex items-center p-4 border-b border-slate-900/10 lg:hidden dark:border-slate-50/[0.06]">
     <%= render "components/documentation/side_nav_mobile" %>
-    <ol class="ml-4 flex text-sm leading-6 whitespace-nowrap min-w-0">
-      <li class="flex items-center dark:text-slate-400">
-          Getting Started
-          <svg width="3" height="6" aria-hidden="true" class="mx-3 overflow-visible text-slate-400">
-            <path d="M0 0L3 3L0 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-          </svg>
-      </li>
-      <li class="font-semibold text-slate-900 truncate dark:text-slate-200">Installation: Tailwind CLI</li>
-    </ol>
+    <%= render "components/documentation/breadcrumbs" %>
 </div>
