@@ -1,4 +1,4 @@
-<div data-controller="portal">
+<div data-controller="portal" class="flex items-center">
   <button data-action="click->portal#open" type="button" class="text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300">
     <span class="sr-only">Navigation</span>
     <svg width="24" height="24">
@@ -8,7 +8,7 @@
   <div data-portal-target="container" class="hidden">
     <div class="fixed z-50 inset-0 overflow-y-auto lg:hidden" id="headlessui-dialog-27" role="dialog" aria-modal="true">
       <div data-action="click->portal#close" class="fixed inset-0 bg-black/20 backdrop-blur-sm dark:bg-slate-900/80" id="headlessui-dialog-overlay-43" aria-hidden="true"></div>
-      <div class="relative bg-white w-80 max-w-[calc(100%-3rem)] p-6 dark:bg-slate-800">
+      <div class="relative bg-white w-80 max-w-[calc(100%-3rem)] p-6 dark:bg-slate-800 min-h-screen">
           <button data-action="click->portal#close" type="button" class="absolute z-10 top-5 right-5 w-8 h-8 flex items-center justify-center text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300" tabindex="0">
             <span class="sr-only">Close navigation</span>
             <svg viewBox="0 0 10 10" class="w-2.5 h-2.5 overflow-visible">
@@ -39,8 +39,10 @@
                 </li>
               <% end %>
                 
-              <% Section.categories.keys.reverse.each do |cat| %>
-                <%= render 'sections/section_category', klass: @klass, category: cat %>
+              <% if @klass %>
+                <% Section.categories.keys.reverse.each do |cat| %>
+                  <%= render 'sections/section_category', klass: @klass, category: cat %>
+                <% end %>
               <% end %>
             </ul>
           </nav>
