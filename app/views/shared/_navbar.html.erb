@@ -47,13 +47,9 @@
                 <% end %>
               </div>
           </div>
-          <button type="button" class="ml-auto text-slate-500 w-8 h-8 -my-1 flex items-center justify-center hover:text-slate-600 lg:hidden dark:text-slate-400 dark:hover:text-slate-300">
-              <span class="sr-only">Search</span>
-              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="m19 19-3.5-3.5"></path>
-                <circle cx="11" cy="11" r="6"></circle>
-              </svg>
-          </button>
+          <div class="ml-auto lg:hidden">
+            <%= render 'shared/navbar/search' %>
+          </div>
           <div class="ml-2 -my-1 lg:hidden">
               <%= render "shared/navbar/top_right_mobile_menu" %>
           </div>

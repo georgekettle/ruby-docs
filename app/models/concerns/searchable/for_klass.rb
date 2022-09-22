@@ -7,16 +7,34 @@ module Searchable::ForKlass
 
     algoliasearch per_environment: true do
       attribute :name, :id, :created_at
+      add_attribute :version_number
 
-      attribute :version do
-        { id: version.id, number: version.number }
+      attributesForFaceting [:version_number, :class]
+
+      searchableAttributes ['name', 'unordered(version_number)']
+    
+      add_index "docs", id: :algolia_id do
+        attribute :name, :id, :created_at, :class
+        add_attribute :version_number
+
+        attributesForFaceting [:version_number, :class]
+
+        searchableAttributes ['name', 'unordered(version_number)']
       end
-
-      searchableAttributes ['unordered(name)', 'unordered(version.number)']
     end
   end
 
   def trigger_update_associations
     sections.each(&:touch)
+  end
+
+  private
+
+  def version_number
+    version.number
+  end
+
+  def algolia_id
+    "klass_#{id}" # ensure the version, klass & section IDs are not conflicting
   end
 end

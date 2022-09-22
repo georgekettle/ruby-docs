@@ -4,7 +4,7 @@
     <% klass.sections.where(category: category).each do |section| %>
       <% section_classes = params[:section_name] == section.name ? "block border-l pl-4 -ml-px text-primary-500 border-current font-semibold dark:text-primary-400" : "block border-l pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300" %>
       <li>
-        <%= link_to section_path(klass.version.number, klass.name, section.name), class: section_classes do %>
+        <%= link_to section_path(section), class: section_classes do %>
           <% if section.instance_method? %>
             <span>#</span>
           <% elsif section.class_method? %>

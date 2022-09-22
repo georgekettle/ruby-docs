@@ -1,0 +1,22 @@
+<%= turbo_frame_tag "search-hits" do %>
+  <% if params[:query] %>
+    <div class="dark:text-slate-300">
+      <% hits.each do |klass_name, results| %>
+        <div class="mb-4">
+          <% if klass_name == "Klass" %>
+            <p class="pb-4 text-md font-semibold dark:text-slate-200">Classes</p>
+          <% elsif klass_name == "Section" %>
+            <p class="pb-4 text-md font-semibold dark:text-slate-200">Methods</p>
+          <% else %>
+            <p class="pb-4 text-md font-semibold dark:text-slate-200"><%= klass_name %></p>
+          <% end %>
+          <ul>
+            <% results.each do |result| %>
+              <%= render "#{result.class.to_s.pluralize.underscore}/search_result", record: result %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
