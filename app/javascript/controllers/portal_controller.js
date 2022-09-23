@@ -2,12 +2,13 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="portal"
 export default class extends Controller {
-  static targets = ["container"]
+  static targets = ["container", "autofocus"]
   static values = {
     "triggerId": String
   }
   
   connect() {
+    this.hasAutofocusTarget && console.log(this.autofocusTarget)
     this.portalTarget = document.createElement('div')
     document.body.insertAdjacentElement('beforeend', this.portalTarget)
     this.contentTarget = this.containerTarget.children[0]
@@ -26,6 +27,7 @@ export default class extends Controller {
     e.preventDefault()
     this.portalTarget.insertAdjacentElement('beforeend', this.contentTarget)
     this._addEventListenersToCloseButtons()
+    this._focusAutofocusTargets()
   }
 
   close(event) {
@@ -63,5 +65,10 @@ export default class extends Controller {
     this.outsideTriggerTargets.forEach((trigger) => {
       trigger.removeEventListener('click', this.openWithBind)
     })
+  }
+
+  _focusAutofocusTargets() {
+    const autofocusTarget = this.contentTarget.querySelector('[data-portal-target="autofocus"]')
+    autofocusTarget.focus()
   }
 }
