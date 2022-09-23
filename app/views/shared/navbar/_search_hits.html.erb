@@ -19,6 +19,12 @@
       <% end %>
     </div>
   <% elsif params[:query] %>
-    <p class="font-normal text-sm text-slate-400 text-center p-8">No results for "<%= params[:query] %>" 🙉</p>
+    <div class="p-8">
+      <p class="font-normal text-sm text-slate-400 text-center mb-4">We looked both ways, but couldn't find any results for "<%= params[:query] %>"</p>
+      <div class="w-full pointer-events-none overflow-hidden rounded-xl shadow">
+        <div style="width:100%;height:0;padding-bottom:56%;position:relative;">
+          <iframe src="https://giphy.com/embed/28cUPIfjtmKVYO8flA" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+      </div>
+    </div>
   <% end %>
 <% end %>
