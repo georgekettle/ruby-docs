@@ -14,7 +14,7 @@ export default class extends Controller {
     this.portalTarget = document.createElement('div')
     document.body.insertAdjacentElement('beforeend', this.portalTarget)
     this.contentTarget = this.containerTarget.children[0]
-    this.closeWithBind = this._close.bind(this) // assigned so as to be able to refer to same function in _addEventListenersToCloseButtons and _removeEventListenersToCloseButtons
+    this.closeWithBind = this._close.bind(this) // assigned so as to be able to refer to same function in _addEventListenersToCloseButtons and _removeEventListenersFromCloseButtons
     this.openWithBind = this.open.bind(this) // assigned so as to be able to refer to same function in _setupTriggersOutsideScope
     this.hasTriggerIdValue && this._setupTriggersOutsideScope()
     this._setupHotkeyTriggers()
@@ -31,7 +31,7 @@ export default class extends Controller {
     document.body.insertAdjacentElement('beforeend', this.portalTarget)
     this.portalTarget.insertAdjacentElement('beforeend', this.contentTarget)
     this._addEventListenersToCloseButtons()
-    this.hasAutofocusTarget && this._focusAutofocusTargets()
+    this._focusAutofocusTargets()
   }
 
   close(event) {
@@ -41,7 +41,7 @@ export default class extends Controller {
   _close(e) {
     e.preventDefault()
     this.containerTarget.insertAdjacentElement('beforeend', this.contentTarget)
-    this._removeEventListenersToCloseButtons()
+    this._removeEventListenersFromCloseButtons()
   }
 
   _addEventListenersToCloseButtons() {
@@ -51,7 +51,7 @@ export default class extends Controller {
     })
   }
 
-  _removeEventListenersToCloseButtons() {
+  _removeEventListenersFromCloseButtons() {
     const closeButtons = this.contentTarget.querySelectorAll('[data-action="click->portal#close"]')
     closeButtons.forEach((btn) => {
       btn.removeEventListener('click', this.closeWithBind)
@@ -73,7 +73,7 @@ export default class extends Controller {
 
   _focusAutofocusTargets() {
     const autofocusTarget = this.contentTarget.querySelector('[data-portal-target="autofocus"]')
-    autofocusTarget.focus()
+    autofocusTarget && autofocusTarget.focus()
   }
 
   _setupHotkeyTriggers() {
