@@ -1,33 +1,37 @@
 import { Controller } from "@hotwired/stimulus"
+import hotkeys from 'hotkeys-js'
 
 // Connects to data-controller="portal"
 export default class extends Controller {
   static targets = ["container", "autofocus"]
   static values = {
-    "triggerId": String
+    "triggerId": String,
+    "openHotkeys": Array,
+    "closeHotkeys": Array
   }
   
   connect() {
-    this.hasAutofocusTarget && console.log(this.autofocusTarget)
     this.portalTarget = document.createElement('div')
     document.body.insertAdjacentElement('beforeend', this.portalTarget)
     this.contentTarget = this.containerTarget.children[0]
     this.closeWithBind = this._close.bind(this) // assigned so as to be able to refer to same function in _addEventListenersToCloseButtons and _removeEventListenersToCloseButtons
     this.openWithBind = this.open.bind(this) // assigned so as to be able to refer to same function in _setupTriggersOutsideScope
     this.hasTriggerIdValue && this._setupTriggersOutsideScope()
+    this._setupHotkeyTriggers()
   }
 
-  disonnect() {
-    this._close()
+  disconnect() {
     this.portalTarget.remove()
-    this._teardownTriggersOutsideScope()
+    this.hasTriggerIdValue && this._teardownTriggersOutsideScope()
+    this._teardownHotkeyTriggers()
   }
 
   open(e) {
     e.preventDefault()
+    document.body.insertAdjacentElement('beforeend', this.portalTarget)
     this.portalTarget.insertAdjacentElement('beforeend', this.contentTarget)
     this._addEventListenersToCloseButtons()
-    this._focusAutofocusTargets()
+    this.hasAutofocusTarget && this._focusAutofocusTargets()
   }
 
   close(event) {
@@ -70,5 +74,23 @@ export default class extends Controller {
   _focusAutofocusTargets() {
     const autofocusTarget = this.contentTarget.querySelector('[data-portal-target="autofocus"]')
     autofocusTarget.focus()
+  }
+
+  _setupHotkeyTriggers() {
+    this.openHotkeysValue.forEach((hotkey) => {
+      hotkeys(hotkey, this.openWithBind)
+    })
+    this.closeHotkeysValue.forEach((hotkey) => {
+      hotkeys(hotkey, this.closeWithBind)
+    })
+  }
+
+  _teardownHotkeyTriggers() {
+    this.openHotkeysValue.forEach((hotkey) => {
+      hotkeys.unbind(hotkey)
+    })
+    this.closeHotkeysValue.forEach((hotkey) => {
+      hotkeys.unbind(hotkey)
+    })
   }
 }
