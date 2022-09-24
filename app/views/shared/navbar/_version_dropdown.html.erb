@@ -1,0 +1,31 @@
+<div data-controller="dropdown" class="relative">
+  <button data-action="dropdown#toggle click@window->dropdown#hide" class="text-xs leading-5 font-semibold bg-slate-400/10 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:highlight-white/5 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-300 dark:hover:text-slate-100" type="button">
+    v<!-- --><%= Current.version.number %>
+    <svg width="6" height="3" class="ml-2 overflow-visible" aria-hidden="true">
+        <path d="M0 0L3 3L6 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+    </svg>
+  </button>
+  <div
+    data-dropdown-target="menu"
+    class="hidden transition transform origin-top-left absolute left-0"
+    data-transition-enter-from="opacity-0 scale-95"
+    data-transition-enter-to="opacity-100 scale-100"
+    data-transition-leave-from="opacity-100 scale-100"
+    data-transition-leave-to="opacity-0 scale-95"
+  >
+    <div class="absolute top-full mt-1 py-2 w-40 rounded-lg bg-white shadow ring-1 ring-slate-900/5 text-sm leading-6 font-semibold text-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:highlight-white/5">
+      <% Version.all.each do |version| %>
+        <% if version == Current.version %>
+          <span class="flex items-center justify-between px-4 py-1 text-primary-500 dark:text-primary-400" role="menuitem" aria-disabled="true">
+            v<!-- --><%= version.number %>
+            <svg width="24" height="24" fill="none" aria-hidden="true">
+              <path d="m7.75 12.75 2.25 2.5 6.25-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        <% else %>
+          <%= link_to "v#{version.number}", version_path(version.number), class: "text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

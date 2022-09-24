@@ -5,7 +5,7 @@ if Rails.env == "development"
 end
 
 puts "Creating Ruby versions"
-versions = ['2.6', '2.7', '3.0', '3.1']
+versions = ['3.0', '3.1']
 versions.each do |version|
 	Version.create!(number: version)
 end

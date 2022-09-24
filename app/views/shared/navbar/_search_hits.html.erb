@@ -1,0 +1,31 @@
+<%= turbo_frame_tag "search-hits", data: { search_target: "hits" } do %>
+  <% if hits.present? %>
+    <div class="dark:text-slate-300">
+      <% hits.each do |klass_name, results| %>
+        <div class="mb-4">
+          <% if klass_name == "Klass" %>
+            <p class="pb-4 text-md font-semibold dark:text-slate-200">Classes</p>
+          <% elsif klass_name == "Section" %>
+            <p class="pb-4 text-md font-semibold dark:text-slate-200">Methods</p>
+          <% else %>
+            <p class="pb-4 text-md font-semibold dark:text-slate-200"><%= klass_name %></p>
+          <% end %>
+          <ul>
+            <% results.each do |result| %>
+              <%= render "#{result.class.to_s.pluralize.underscore}/search_result", record: result %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  <% elsif params[:query] %>
+    <div class="p-8">
+      <p class="font-normal text-sm text-slate-400 text-center mb-4">We looked both ways, but couldn't find any results for "<%= params[:query] %>"</p>
+      <div class="w-full pointer-events-none overflow-hidden rounded-xl shadow">
+        <div style="width:100%;height:0;padding-bottom:56%;position:relative;">
+          <iframe src="https://giphy.com/embed/28cUPIfjtmKVYO8flA" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

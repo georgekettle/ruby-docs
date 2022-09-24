@@ -1,0 +1,19 @@
+<%= render 'components/documentation/side_nav_search' %>
+<ul class="overflow-scroll h-full">
+  <div class="pt-1">
+    <% Current.version.klasses.each do |klass| %>
+      <% link_classes = params[:klass_name] == klass.name ? "group flex items-center lg:text-sm lg:leading-6 mb-4 font-semibold text-primary-500 dark:text-primary-400" : "group flex items-center lg:text-sm lg:leading-6 mb-4 font-medium text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300" %>
+      <li>
+        <%= link_to klass_path(klass), class: link_classes do %>
+          <div class="mr-4 rounded-md ring-1 ring-slate-900/5 shadow-sm group-hover:shadow ml-[1px] group-hover:ml-1 transition-all duration-300 group-hover:ring-slate-900/10 dark:ring-0 dark:shadow-none dark:group-hover:shadow-none dark:group-hover:highlight-white/10 group-hover:shadow-black-200 dark:group-hover:bg-black-500 dark:bg-black-500 dark:highlight-white/10">
+              <%= image_tag "#{klass.name&.downcase}.svg", class:"h-6 w-6" %>
+          </div>
+          <%= klass.name %>
+        <% end %>
+      </li>
+    <% end %>
+  </div>
+  <% Section.categories.keys.reverse.each do |cat| %>
+    <%= render 'sections/section_category', klass: @klass, category: cat %>
+  <% end %>
+</ul>

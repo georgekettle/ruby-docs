@@ -1,0 +1,14 @@
+<%= form_tag search_path, method: :get, data: { turbo_frame: "search-hits" } do %>
+  <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
+  <div class="relative">
+    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m19 19-3.5-3.5"></path>
+        <circle cx="11" cy="11" r="6"></circle>
+      </svg>
+    </div>
+    <% query = params[:query].nil? ? params[:query] : "" %>
+    <%= text_field_tag :query, query, {placeholder: "Search documentation", data: { portal_target: "autofocus", search_target: "input", action: "keyup->search#submit" }, class: "block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 font-normal ring-0 focus:ring-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white border-none"} %>
+    <%= link_to "ESC", "#", data: { action: "click->portal#close" }, class: "absolute text-mono right-2.5 bottom-1/2 text-slate-500 transform translate-y-1/2 bg-white ring-slate-200 hover:ring-slate-300 ring-1 font-medium rounded text-[0.6rem] px-2 dark:text-slate-400 dark:bg-slate-600 dark:ring-slate-700 dark:hover:bg-slate-800 dark:focus:ring-slate-900" %>
+  </div>
+<% end %>
