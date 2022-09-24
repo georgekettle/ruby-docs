@@ -10,7 +10,7 @@
     <div class="fixed z-50 inset-0" id="headlessui-dialog-6" role="dialog" aria-modal="true">
       <div data-action="click->portal#close" class="fixed inset-0 bg-black/20 backdrop-blur-sm dark:bg-slate-900/80" id="headlessui-dialog-overlay-41" aria-hidden="true"></div>
       <div class="fixed inset-0 flex justify-center p-4 lg:p-24 pointer-events-none">
-        <div class="pointer-events-auto overflow-scroll w-full max-w-xl bg-white rounded-lg shadow-lg text-base font-semibold text-slate-900 dark:bg-slate-800 dark:text-slate-400 dark:highlight-white/5">
+        <div data-controller="search" class="pointer-events-auto overflow-scroll w-full max-w-xl bg-white rounded-lg shadow-lg text-base font-semibold text-slate-900 dark:bg-slate-800 dark:text-slate-400 dark:highlight-white/5">
           <%= render 'shared/navbar/search_form' %>
           <div class="p-4 sm:p-6">
             <%= render 'shared/navbar/search_hits', hits: {} %>

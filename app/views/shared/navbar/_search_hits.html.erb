@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "search-hits" do %>
+<%= turbo_frame_tag "search-hits", data: { search_target: "hits" } do %>
   <% if hits.present? %>
     <div class="dark:text-slate-300">
       <% hits.each do |klass_name, results| %>
