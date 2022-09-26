@@ -1,0 +1,21 @@
+<div data-controller="alert" class="overflow-hidden max-w-sm w-full shadow-xl rounded-lg rounded relative bg-yellow-500 text-white pointer-events-auto mb-1 ease-out transition-transform duration-300 transform -translate-y-24" data-alert-dismiss-after-value="5000">
+  <div class="p-4">
+    <div class="flex items-center">
+      <div class="ml-2 w-0 flex-1 pt-0.5">
+        <div class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+            <path fill-rule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
+          </svg>
+          <p class="text-sm leading-5 font-medium">
+            <%= alert %>
+          </p>
+        </div>
+      </div>
+      <div class="ml-4 flex-shrink-0 flex">
+        <button data-action="alert#close" class="transform transition-all duration-200 ease-out hover:scale-110 opacity-60 hover:opacity-100">
+          <%= render 'icons/close', classes: "text-white h-5 w-5" %>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

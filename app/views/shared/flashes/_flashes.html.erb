@@ -1,0 +1,8 @@
+<div id="flashes" class="fixed inset-x-0 top-0 flex items-end justify-right px-4 py-4 sm:py-6 sm:p-6 justify-center flex-col items-center pointer-events-none" style="z-index:1000">
+  <% if notice %>
+    <%= render 'shared/flashes/notice', notice: notice %>
+  <% end %>
+  <% if alert %>
+    <%= render 'shared/flashes/alert', alert: alert %>
+  <% end %>
+</div>
