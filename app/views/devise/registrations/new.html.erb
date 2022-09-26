@@ -11,21 +11,24 @@
             <div class="field">
               <%= f.label :email, class: "text-base font-medium text-slate-900 dark:text-white" %>
               <div class="mt-2.5">
-                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter email to get started", class: "block w-full p-4 text-slate-900 placeholder-slate-500 transition-all duration-200 border border-slate-200 rounded-md bg-slate-50 focus:outline-none focus:border-primary-600 focus:bg-white dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter email to get started", class: "block w-full p-4 text-slate-900 placeholder-slate-500 transition-all duration-200 border border-slate-200 rounded-md bg-slate-50 focus:outline-none focus:border-primary-600 focus:bg-white caret-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" %>
               </div>
             </div>
 
             <div class="field">
               <%= f.label :password, class: "text-base font-medium text-slate-900 dark:text-white" %>
-              <div class="mt-2.5">
-                <%= f.password_field :password, autocomplete: "new-password", placeholder: "Enter your password", class: "block w-full p-4 text-slate-900 placeholder-slate-500 transition-all duration-200 border border-slate-200 rounded-md bg-slate-50 focus:outline-none focus:border-primary-600 focus:bg-white dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" %>
+              <% if @minimum_password_length %>
+								<em class="text-xs text-slate-400">(<%= @minimum_password_length %> characters minimum)</em>
+							<% end %><br />
+							<div class="mt-2.5">
+                <%= f.password_field :password, autocomplete: "new-password", placeholder: "Enter your password", class: "block w-full p-4 text-slate-900 placeholder-slate-500 transition-all duration-200 border border-slate-200 rounded-md bg-slate-50 focus:outline-none focus:border-primary-600 focus:bg-white caret-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" %>
               </div>
             </div>
 
 						<div class="field">
               <%= f.label :password_confirmation, class: "text-base font-medium text-slate-900 dark:text-white" %>
               <div class="mt-2.5">
-                <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Re-enter your password", class: "block w-full p-4 text-slate-900 placeholder-slate-500 transition-all duration-200 border border-slate-200 rounded-md bg-slate-50 focus:outline-none focus:border-primary-600 focus:bg-white dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" %>
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Re-enter your password", class: "block w-full p-4 text-slate-900 placeholder-slate-500 transition-all duration-200 border border-slate-200 rounded-md bg-slate-50 focus:outline-none focus:border-primary-600 focus:bg-white caret-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" %>
               </div>
             </div>
 
