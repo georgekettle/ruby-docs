@@ -1,4 +1,6 @@
-class SearchController < ApplicationController  
+class SearchController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:search]
+
   def search
     @hits = AlgoliaDocsIndexSearcher.new(params[:query]).call
   end

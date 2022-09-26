@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root "pages#home"
   get "v/:version_number/:klass_name/:section_name", to: "sections#show", as: :section, :version_number => /[^\/]+/
   get "v/:version_number/:klass_name", to: "klasses#show", as: :klass, :version_number => /[^\/]+/

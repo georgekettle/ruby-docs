@@ -1,5 +1,6 @@
 class KlassesController < ApplicationController
   layout "documentation", only: [:show]
+  skip_before_action :authenticate_user!, only: [:show]
 
   def show
     @version = Version.find_by_number(params[:version_number])

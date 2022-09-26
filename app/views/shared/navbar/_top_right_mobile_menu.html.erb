@@ -24,6 +24,22 @@
               </li>
             <% end %>
           </ul>
+          <div class="mt-6 pt-6 border-t border-slate-200 dark:border-slate-200/10 space-y-6">
+            <ul class="space-y-6">
+              <% if user_signed_in? %>
+                <li>
+                  <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "hover:text-primary-500 dark:hover:text-primary-400" %>
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to "Create account", new_user_registration_path, class: "hover:text-primary-500 dark:hover:text-primary-400" %>
+                </li>
+                <li>
+                  <%= link_to "Sign in", new_user_session_path, class: "hover:text-primary-500 dark:hover:text-primary-400" %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
           <div class="mt-6 pt-6 border-t border-slate-200 dark:border-slate-200/10">
             <div class="flex items-center justify-between">
                 <label for="theme" class="text-slate-700 font-normal dark:text-slate-400">Switch theme</label>

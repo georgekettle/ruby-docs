@@ -1,0 +1,46 @@
+<section>
+	<div class="flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
+		<div class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
+				<h1 class="inline-block text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-200">Create account</h1>
+				<p class="mt-2 mb-5 text-base text-slate-600">Already have an account? <%= link_to "Sign in", new_user_session_path, class: "font-medium text-primary-600 transition-all duration-200 hover:text-primary-700 hover:underline focus:text-primary-700" %></p>
+
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { data: { turbo: false } }) do |f| %>
+					<div class="space-y-5">
+          	<%= render "devise/shared/error_messages", resource: resource %>
+
+            <div class="field">
+              <%= f.label :email, class: "text-base font-medium text-slate-900 dark:text-white" %>
+              <div class="mt-2.5">
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter email to get started", class: "block w-full p-4 text-slate-900 placeholder-slate-500 transition-all duration-200 border border-slate-200 rounded-md bg-slate-50 focus:outline-none focus:border-primary-600 focus:bg-white caret-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" %>
+              </div>
+            </div>
+
+            <div class="field">
+              <%= f.label :password, class: "text-base font-medium text-slate-900 dark:text-white" %>
+              <% if @minimum_password_length %>
+								<em class="text-xs text-slate-400">(<%= @minimum_password_length %> characters minimum)</em>
+							<% end %><br />
+							<div class="mt-2.5">
+                <%= f.password_field :password, autocomplete: "new-password", placeholder: "Enter your password", class: "block w-full p-4 text-slate-900 placeholder-slate-500 transition-all duration-200 border border-slate-200 rounded-md bg-slate-50 focus:outline-none focus:border-primary-600 focus:bg-white caret-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" %>
+              </div>
+            </div>
+
+						<div class="field">
+              <%= f.label :password_confirmation, class: "text-base font-medium text-slate-900 dark:text-white" %>
+              <div class="mt-2.5">
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Re-enter your password", class: "block w-full p-4 text-slate-900 placeholder-slate-500 transition-all duration-200 border border-slate-200 rounded-md bg-slate-50 focus:outline-none focus:border-primary-600 focus:bg-white caret-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" %>
+              </div>
+            </div>
+
+            <div class="actions">
+              <%= f.submit "Create account", class: "cursor-pointer inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-primary-600 border border-transparent rounded-md focus:outline-none hover:bg-primary-700 focus:bg-primary-700" %>
+            </div>
+          </div>
+        <% end %>
+
+				<div class="mt-3 space-y-3">
+					<%= render "devise/shared/links" %>
+				</div>
+		</div>
+	</div>
+</section>
