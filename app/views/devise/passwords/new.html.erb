@@ -4,7 +4,7 @@
 				<h1 class="inline-block text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-200">Forgot your password?</h1>
 				<p class="mt-2 mb-5 text-base text-slate-600">Go back to <%= link_to "Sign in", new_user_session_path, class: "font-medium text-primary-600 transition-all duration-200 hover:text-primary-700 hover:underline focus:text-primary-700" %> or <%= link_to "Sign up", new_user_registration_path, class: "font-medium text-primary-600 transition-all duration-200 hover:text-primary-700 hover:underline focus:text-primary-700" %></p>
 
-        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, data: { turbo: false } }) do |f| %>
 					<div class="space-y-5">
           	<%= render "devise/shared/error_messages", resource: resource %>
 
