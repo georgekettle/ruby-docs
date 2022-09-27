@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :versions, only: [:show] do
     resources :klasses, only: [:new, :create]
   end
-  resources :klasses, only: [:show, :edit, :update, :destroy]
+  resources :klasses, only: [:show, :edit, :update, :destroy] do
+    resources :sections, only: [:new, :create]
+  end
   resources :sections, only: [:show, :edit, :update, :destroy]
 end

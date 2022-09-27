@@ -2,6 +2,7 @@ class SectionsController < ApplicationController
   layout "documentation", only: [:show_redirect]
   skip_before_action :authenticate_user!, only: [:show]
   before_action :set_section, only: [:show, :edit, :update, :destroy]
+  before_action :set_klass, only: [:new, :create]
 
   def show_redirect
     @version = Version.find_by_number(params[:version_number])
@@ -13,6 +14,20 @@ class SectionsController < ApplicationController
 
   def show
     redirect_to section_redirect_path(@section.version.number, @section.klass.name, @section.name), status: :see_other
+  end
+
+  def new
+    @section = Section.new
+  end
+
+  def create
+    @section = Section.new(section_params)
+    @section.klass = @klass
+    if @section.save
+      redirect_to section_path(@section), status: :see_other, notice: "Section successfully created"
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -47,5 +62,9 @@ class SectionsController < ApplicationController
 
   def set_section
     @section = Section.find(params[:id])
+  end
+
+  def set_klass
+    @klass = Klass.find(params[:klass_id])
   end
 end

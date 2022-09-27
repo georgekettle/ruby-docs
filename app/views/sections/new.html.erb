@@ -1,0 +1,9 @@
+<h1>Create section for class: <%= @klass.name %></h1>
+
+<%= simple_form_for [@klass, @section] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :category %>
+  <%= f.input :summary %>
+  <%= f.input :content %>
+  <%= f.submit %>
+<% end %>
