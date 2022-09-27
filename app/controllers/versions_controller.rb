@@ -1,17 +1,16 @@
 class VersionsController < ApplicationController
   layout "documentation", only: [:show_redirect]
   skip_before_action :authenticate_user!, only: [:show]
+  before_action :set_version, only: [:show, :edit, :update, :destroy]
   
   def show_redirect
   end
 
   def show
-    @version = Version.find(params[:id])
     redirect_to version_redirect_path(@version.number), status: :see_other
   end
 
   def edit
-    @version = Version.find(params[:id])
   end
 
   def update
@@ -22,9 +21,18 @@ class VersionsController < ApplicationController
     end
   end
 
+  def destroy
+    @version.destroy
+    redirect_to root_path, status: :see_other, notice: "Successfully deleted version"
+  end
+
   private
 
   def version_params
     params.require(:version).permit(:number)
+  end
+
+  def set_version
+    @version = Version.find(params[:id])
   end
 end
