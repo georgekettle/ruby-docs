@@ -1,0 +1,6 @@
+<h1>Edit version <%= @version.number %></h1>
+
+<%= simple_form_for @version do |f| %>
+  <%= f.input :number %>
+  <%= f.submit %>
+<% end %>
