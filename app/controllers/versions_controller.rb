@@ -10,6 +10,19 @@ class VersionsController < ApplicationController
     redirect_to version_redirect_path(@version.number), status: :see_other
   end
 
+  def new
+    @version = Version.new
+  end
+
+  def create
+    @version = Version.new(version_params)
+    if @version.save
+      redirect_to version_path(@version), status: :see_other, notice: "Version successfully created"
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def edit
   end
 
