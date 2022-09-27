@@ -1,6 +1,7 @@
 class SectionsController < ApplicationController
   layout "documentation", only: [:show_redirect]
   skip_before_action :authenticate_user!, only: [:show]
+  before_action :set_section, only: [:show, :edit, :update]
 
   def show_redirect
     @version = Version.find_by_number(params[:version_number])
@@ -11,8 +12,18 @@ class SectionsController < ApplicationController
   end
 
   def show
-    @section = Section.find(params[:id])
     redirect_to section_redirect_path(@section.version.number, @section.klass.name, @section.name), status: :see_other
+  end
+
+  def edit
+  end
+
+  def update
+    if @section.update(section_params)
+      redirect_to section_path(@section), status: :see_other, notice: "Section successfully updated"
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
@@ -23,5 +34,13 @@ class SectionsController < ApplicationController
 
   def section_name
     params[:section_name]
+  end
+
+  def section_params
+    params.require(:section).permit(:name, :category, :summary, :content)
+  end
+
+  def set_section
+    @section = Section.find(params[:id])
   end
 end

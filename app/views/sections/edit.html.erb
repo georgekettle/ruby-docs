@@ -1,0 +1,9 @@
+<h1>Edit section</h1>
+
+<%= simple_form_for @section do |f| %>
+  <%= f.input :name %>
+  <%= f.input :category %>
+  <%= f.input :summary %>
+  <%= f.input :content %>
+  <%= f.submit %>
+<% end %>
