@@ -14,6 +14,22 @@ class KlassesController < ApplicationController
     redirect_to klass_redirect_path(@klass.version.number, @klass.name), status: :see_other # check this status
   end
 
+  def new
+    @version = Version.find(params[:version_id])
+    @klass = Klass.new
+  end
+
+  def create
+    @klass = Klass.new(klass_params)
+    @version = Version.find(params[:version_id])
+    @klass.version = @version
+    if @klass.save
+      redirect_to klass_path(@klass), status: :see_other, notice: "Successfully created #{@klass.name}"
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def edit
   end
 

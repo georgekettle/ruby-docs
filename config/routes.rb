@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   get "v/:version_number", to: "versions#show_redirect", as: :version_redirect, :version_number => /[^\/]+/
   get "search", to: "search#search", as: :search
 
-  resources :versions, only: [:show]
+  resources :versions, only: [:show] do
+    resources :klasses, only: [:new, :create]
+  end
   resources :klasses, only: [:show, :edit, :update, :destroy]
   resources :sections, only: [:show]
 end

@@ -1,0 +1,8 @@
+<h1>New klass for v<!-- --><%= @version.number %></h1>
+
+<%= simple_form_for [@version, @klass] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :summary %>
+  <%= f.input :content %>
+  <%= f.submit %>
+<% end %>
