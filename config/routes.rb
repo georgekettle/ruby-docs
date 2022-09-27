@@ -10,5 +10,5 @@ Rails.application.routes.draw do
     resources :klasses, only: [:new, :create]
   end
   resources :klasses, only: [:show, :edit, :update, :destroy]
-  resources :sections, only: [:show, :edit, :update]
+  resources :sections, only: [:show, :edit, :update, :destroy]
 end

@@ -1,7 +1,7 @@
 class SectionsController < ApplicationController
   layout "documentation", only: [:show_redirect]
   skip_before_action :authenticate_user!, only: [:show]
-  before_action :set_section, only: [:show, :edit, :update]
+  before_action :set_section, only: [:show, :edit, :update, :destroy]
 
   def show_redirect
     @version = Version.find_by_number(params[:version_number])
@@ -24,6 +24,11 @@ class SectionsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @section.destroy
+    redirect_to klass_path(@section.klass), status: :see_other, notice: "Successfully deleted section"
   end
 
   private
