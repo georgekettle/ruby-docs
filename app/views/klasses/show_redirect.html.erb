@@ -15,9 +15,13 @@
           <h4 class="text-sm font-medium">Only admins can view this</h4>
         </div>
         <div class="flex items-center text-gray-900 space-x-2 text-sm font-medium">
-          <%= link_to edit_klass_path(@klass), class: "px-3 py-2 rounded-full flex items-center justify-center rounded-full border border-slate-200 bg-white shadow-none hover:shadow-sm transform translate-y-0 hover:-translate-y-0.5 transition-all duration-200 ease-out" do %>
+          <%= link_to edit_klass_path(@klass), class: "text-slate-500 hover:text-yellow-500 px-3 py-2 rounded-full flex items-center justify-center rounded-full border border-slate-200 bg-white shadow-none hover:shadow-sm transform translate-y-0 hover:-translate-y-0.5 transition-all duration-200 ease-out" do %>
             <%= render 'icons/edit', classes: "h-4 w-4 mr-1" %>
             Edit
+          <% end %>
+          <%= link_to klass_url(@klass), data: { turbo_method: "delete", turbo_confrim: "Are you sure? You can't undo this action." }, class: "text-slate-500 hover:text-rose-500 px-3 py-2 rounded-full flex items-center justify-center rounded-full border border-slate-200 bg-white shadow-none hover:shadow-sm transform translate-y-0 hover:-translate-y-0.5 transition-all duration-200 ease-out" do %>
+            <%= render 'icons/trash', classes: "h-4 w-4 mr-1" %>
+            Delete
           <% end %>
         </div>
       </div>
