@@ -1,0 +1,9 @@
+<h1>Edit klass</h1>
+
+<%= simple_form_for @klass do |f| %>
+  <%= f.input :name %>
+  <%= f.association :version %>
+  <%= f.input :summary %>
+  <%= f.input :content %>
+  <%= f.submit %>
+<% end %>

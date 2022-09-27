@@ -8,6 +8,20 @@
 
 <div class="p-4">
   <header id="header" class="relative z-20">
+    <% if current_user&.admin? %>
+      <div class="border border-slate-200 bg-slate-50 p-4 rounded-lg mb-8 flex items-center justify-between">
+        <div class="flex items-center text-slate-500">
+          <%= render 'icons/lock', classes: "h-4 w-4 mr-2" %>
+          <h4 class="text-sm font-medium">Only admins can view this</h4>
+        </div>
+        <div class="flex items-center text-gray-900 space-x-2 text-sm font-medium">
+          <%= link_to edit_klass_path(@klass), class: "px-3 py-2 rounded-full flex items-center justify-center rounded-full border border-slate-200 bg-white shadow-none hover:shadow-sm transform translate-y-0 hover:-translate-y-0.5 transition-all duration-200 ease-out" do %>
+            <%= render 'icons/edit', classes: "h-4 w-4 mr-1" %>
+            Edit
+          <% end %>
+        </div>
+      </div>
+    <% end %>
     <div>
       <p class="mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400">Getting started</p>
       <div class="flex items-center">
