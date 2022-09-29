@@ -11,16 +11,16 @@
     <% if current_user&.admin? %>
       <div class="border border-slate-200 bg-slate-50 p-4 rounded-lg mb-8 flex items-center justify-between">
         <div class="flex items-center text-slate-500">
-          <%= render 'icons/lock', classes: "h-4 w-4 mr-2" %>
+          <%= heroicon "lock-closed", variant: :mini, options: { class: "mr-2" } %>
           <h4 class="text-sm font-medium">Only admins can view this</h4>
         </div>
         <div class="flex items-center text-gray-900 space-x-2 text-sm font-medium">
           <%= link_to edit_section_path(@section), class: "text-slate-500 hover:text-yellow-500 px-3 py-2 rounded-full flex items-center justify-center rounded-full border border-slate-200 bg-white shadow-none hover:shadow-sm transform translate-y-0 hover:-translate-y-0.5 transition-all duration-200 ease-out" do %>
-            <%= render 'icons/edit', classes: "h-4 w-4 mr-1" %>
+            <%= heroicon "pencil", variant: :mini, options: { class: "mr-1" } %>
             Edit
           <% end %>
           <%= link_to section_path(@section), data: { turbo_method: "delete", turbo_confrim: "Are you sure? You can't undo this action." }, class: "text-slate-500 hover:text-rose-500 px-3 py-2 rounded-full flex items-center justify-center rounded-full border border-slate-200 bg-white shadow-none hover:shadow-sm transform translate-y-0 hover:-translate-y-0.5 transition-all duration-200 ease-out" do %>
-            <%= render 'icons/trash', classes: "h-4 w-4 mr-1" %>
+            <%= heroicon "trash", variant: :mini, options: { class: "mr-1" } %>
             Delete
           <% end %>
         </div>
