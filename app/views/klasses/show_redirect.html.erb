@@ -7,35 +7,35 @@
 <% end %>
 
 <div class="p-4">
-  <header id="header" class="relative z-20">
-    <% if current_user&.admin? %>
-      <div class="border border-slate-200 bg-slate-50 p-4 rounded-lg mb-8 flex items-center justify-between flex-col md:flex-row dark:border-slate-200 dark:bg-slate-200">
-        <div class="flex items-center text-slate-500 mb-4 md:mb-0">
-          <%= heroicon "lock-closed", variant: :mini, options: { class: "mr-2" } %>
-          <h4 class="text-sm font-medium">Only admins can view this</h4>
-        </div>
-        <div class="flex items-center text-gray-500 space-x-2 text-sm font-medium">
-          <%= link_to new_klass_section_path(@klass), class: "px-3 py-1.5 text bg-transparent hover:bg-black hover:bg-opacity-5 rounded-md flex items-center" do %>
-            <%= heroicon "plus-small", options: { class: "mr-1" } %>
-            Add section
-          <% end %>
-          <%= link_to edit_klass_path(@klass), class: "px-3 py-1.5 text bg-transparent hover:bg-black hover:bg-opacity-5 rounded-md flex items-center" do %>
-            <%= heroicon "pencil", variant: :mini, options: { class: "mr-1" } %>
-            Edit
-          <% end %>
-          <%= link_to klass_path(@klass), data: { turbo_method: "delete", turbo_confrim: "Are you sure? You can't undo this action." }, class: "px-3 py-1.5 text bg-transparent hover:bg-black hover:bg-opacity-5 rounded-md flex items-center" do %>
-            <%= heroicon "trash", variant: :mini, options: { class: "mr-1" } %>
-            Delete
-          <% end %>
-        </div>
+  <% if current_user&.admin? %>
+    <div class="border border-slate-200 bg-slate-50 p-4 rounded-lg mb-8 flex items-center justify-between flex-col md:flex-row dark:border-slate-200 dark:bg-slate-200">
+      <div class="flex items-center text-slate-500 mb-4 md:mb-0">
+        <%= heroicon "lock-closed", variant: :mini, options: { class: "mr-2" } %>
+        <h4 class="text-sm font-medium">Only admins can view this</h4>
       </div>
-    <% end %>
+      <div class="flex items-center text-gray-500 space-x-2 text-sm font-medium">
+        <%= link_to new_klass_section_path(@klass), class: "px-3 py-1.5 text bg-transparent hover:bg-black hover:bg-opacity-5 rounded-md flex items-center" do %>
+          <%= heroicon "plus-small", options: { class: "mr-1" } %>
+          Add section
+        <% end %>
+        <%= link_to edit_klass_path(@klass), class: "px-3 py-1.5 text bg-transparent hover:bg-black hover:bg-opacity-5 rounded-md flex items-center" do %>
+          <%= heroicon "pencil", variant: :mini, options: { class: "mr-1" } %>
+          Edit
+        <% end %>
+        <%= link_to klass_path(@klass), data: { turbo_method: "delete", turbo_confrim: "Are you sure? You can't undo this action." }, class: "px-3 py-1.5 text bg-transparent hover:bg-black hover:bg-opacity-5 rounded-md flex items-center" do %>
+          <%= heroicon "trash", variant: :mini, options: { class: "mr-1" } %>
+          Delete
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <header id="header" class="relative z-20">
     <div>
       <p class="mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400">Getting started</p>
       <div class="flex items-center">
         <h1 class="inline-block text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-200"><%= @klass.name %></h1>
       </div>
     </div>
-    <p class="mt-2 text-lg text-slate-700 dark:text-slate-400">Condensed explanation to give an idea</p>
+    <p class="mt-2 text-lg text-slate-700 dark:text-slate-400"><%= @klass.summary %></p>
   </header>
 </div>
