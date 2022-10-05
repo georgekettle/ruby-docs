@@ -12,7 +12,11 @@
         <li>
           <%= link_to klass_path(klass), class: link_classes do %>
             <div class="mr-4 rounded-md ring-1 ring-slate-900/5 shadow-sm group-hover:shadow ml-[1px] group-hover:ml-1 transition-all duration-300 group-hover:ring-slate-900/10 dark:ring-0 dark:shadow-none dark:group-hover:shadow-none dark:group-hover:highlight-white/10 group-hover:shadow-black-200 dark:group-hover:bg-black-500 dark:bg-black-500 dark:highlight-white/10">
-              <%= image_tag "#{klass.name&.downcase}.svg", class:"h-6 w-6" %>
+              <% if resolve_asset_path("#{klass.name&.downcase}.svg") %>
+                <%= image_tag "#{klass.name&.downcase}.svg", class:"h-6 w-6" %>
+              <% else %>
+                <%= heroicon 'sparkles', options: { class:"h-4 w-4 m-1" } %>
+              <% end %>
             </div>
             <%= klass.name %>
           <% end %>
@@ -23,35 +27,36 @@
 <% end %>
 
 <div class="p-4">
-  <header id="header" class="relative z-20">
-    <% if current_user&.admin? %>
-      <div class="border border-slate-200 bg-slate-50 p-4 rounded-lg mb-8 flex items-center justify-between">
-        <div class="flex items-center text-slate-500">
-          <%= heroicon "lock-closed", variant: :mini, options: { class: "mr-2" } %>
-          <h4 class="text-sm font-medium">Only admins can view this</h4>
-        </div>
-        <div class="flex items-center text-gray-900 space-x-2 text-sm font-medium">
-          <%= link_to new_version_klass_path(Current.version), class: "text-contrast-600 bg-contrast-100 border border-contrast-200 hover:text-white hover:bg-contrast-600 hover:border-white px-3 py-2 rounded-full flex items-center justify-center rounded-full shadow-none hover:shadow-sm transform translate-y-0 hover:-translate-y-0.5 transition-all duration-200 ease-out" do %>
-            <%= heroicon "plus-small", options: { class: "mr-1" } %>
-            Add class
-          <% end %>
-          <%= link_to edit_version_path(Current.version), class: "text-slate-500 hover:text-yellow-500 px-3 py-2 rounded-full flex items-center justify-center rounded-full border border-slate-200 bg-white shadow-none hover:shadow-sm transform translate-y-0 hover:-translate-y-0.5 transition-all duration-200 ease-out" do %>
-            <%= heroicon "pencil", variant: :mini, options: { class: "mr-1" } %>
-            Edit
-          <% end %>
-          <%= link_to version_path(Current.version), data: { turbo_method: "delete", turbo_confrim: "Are you sure? You can't undo this action." }, class: "text-slate-500 hover:text-rose-500 px-3 py-2 rounded-full flex items-center justify-center rounded-full border border-slate-200 bg-white shadow-none hover:shadow-sm transform translate-y-0 hover:-translate-y-0.5 transition-all duration-200 ease-out" do %>
-            <%= heroicon "trash", variant: :mini, options: { class: "mr-1" } %>
-            Delete
-          <% end %>
-        </div>
+  <% if current_user&.admin? %>
+    <div class="border border-slate-200 bg-slate-50 p-4 rounded-lg mb-8 flex items-center justify-between">
+      <div class="flex items-center text-slate-500">
+        <%= heroicon "lock-closed", variant: :mini, options: { class: "mr-2" } %>
+        <h4 class="text-sm font-medium">Only admins can view this</h4>
       </div>
-    <% end %>
+      <div class="flex items-center text-gray-500 space-x-2 text-sm font-medium">
+        <% link_classes = "px-3 py-1.5 text bg-transparent hover:bg-black hover:bg-opacity-5 rounded-md flex items-center" %>
+        <%= link_to new_version_klass_path(Current.version), class: link_classes do %>
+          <%= heroicon "plus-small", options: { class: "mr-1" } %>
+          Add class
+        <% end %>
+        <%= link_to edit_version_path(Current.version), class: link_classes do %>
+          <%= heroicon "pencil", variant: :mini, options: { class: "mr-1" } %>
+          Edit
+        <% end %>
+        <%= link_to version_path(Current.version), data: { turbo_method: "delete", turbo_confrim: "Are you sure? You can't undo this action." }, class: link_classes do %>
+          <%= heroicon "trash", variant: :mini, options: { class: "mr-1" } %>
+          Delete
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <header id="header" class="relative z-20">
     <div>
       <p class="mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400">Ruby version</p>
       <div class="flex items-center">
         <h1 class="inline-block text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-200"><%= Current.version.number %></h1>
       </div>
     </div>
-    <p class="mt-2 text-lg text-slate-700 dark:text-slate-400">Condensed explanation to give an idea</p>
   </header>
+  <p class="mt-2 text-lg text-slate-700 dark:text-slate-400">Condensed explanation to give an idea</p>
 </div>

@@ -1,3 +1,4 @@
-<h1>Edit version <%= @version.number %></h1>
-
-<%= render 'form', version: @version %>
+<%= render 'components/containers/medium' do %>
+  <h1 class="mb-5 inline-block text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-200">Edit Ruby v<!-- --><%= @version.number %></h1>
+  <%= render 'form', version: @version %>
+<% end %>
