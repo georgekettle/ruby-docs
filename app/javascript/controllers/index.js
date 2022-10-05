@@ -12,3 +12,9 @@ eagerLoadControllersFrom("controllers", application)
 
 import Dropdown from 'stimulus-dropdown'
 application.register('dropdown', Dropdown)
+
+import CharacterCounter from 'stimulus-character-counter'
+application.register('character-counter', CharacterCounter)
+
+import TextareaAutogrow from 'stimulus-textarea-autogrow'
+application.register('textarea-autogrow', TextareaAutogrow)
