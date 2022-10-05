@@ -18,7 +18,7 @@ class VersionsController < ApplicationController
   def create
     @version = Version.new(version_params)
     if @version.save
-      redirect_to version_path(@version), status: :see_other, notice: "Version successfully created"
+      redirect_to version_redirect_path(@version.number, format: :html), status: :see_other, notice: "Version successfully created"
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class VersionsController < ApplicationController
 
   def update
     if @version.update(version_params)
-      redirect_to version_path(@version), status: :see_other, notice: "Version successfully updated"
+      redirect_to version_redirect_path(@version.number, format: :html), status: :see_other, notice: "Version successfully updated"
     else
       render :edit, status: :unprocessable_entity
     end
