@@ -6,7 +6,11 @@
       <li>
         <%= link_to klass_path(klass), class: link_classes do %>
           <div class="mr-4 rounded-md ring-1 ring-slate-900/5 shadow-sm group-hover:shadow ml-[1px] group-hover:ml-1 transition-all duration-300 group-hover:ring-slate-900/10 dark:ring-0 dark:shadow-none dark:group-hover:shadow-none dark:group-hover:highlight-white/10 group-hover:shadow-black-200 dark:group-hover:bg-black-500 dark:bg-black-500 dark:highlight-white/10">
+            <% if resolve_asset_path("#{klass.name&.downcase}.svg") %>
               <%= image_tag "#{klass.name&.downcase}.svg", class:"h-6 w-6" %>
+            <% else %>
+              <%= heroicon 'sparkles', options: { class:"h-4 w-4 m-1" } %>
+            <% end %>
           </div>
           <%= klass.name %>
         <% end %>

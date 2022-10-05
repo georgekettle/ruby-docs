@@ -1,0 +1,17 @@
+<%= render 'components/containers/medium' do %>
+  <p class="mb-1 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400"><%= @klass.name %></p>
+  <h1 class="mb-5 inline-block text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-200">Create section</h1>
+
+  <%= simple_form_for [@klass, @section] do |f| %>
+    <div class="space-y-5">
+      <%= f.input :name, placeholder: "Name of section" %>
+      <%= f.input :category, collection: Section.categories.keys, include_blank: false, include_hidden: false %>
+      <div data-controller="character-counter" data-character-counter-countdown-value="true">
+        <%= f.input :summary, as: :text, placeholder: "Description of class", maxlength: 140, input_html: { data: { character_counter_target: "input", controller: "textarea-autogrow" }} %>
+        <p data-character-counter-target="counter" class='text-xs text-right text-slate-400 dark:text-slate-600 block mt-1'>140</p>
+      </div>
+      <%= f.input :content, placeholder: "Content for info page", input_html: { data: { controller: "textarea-autogrow" }} %>
+      <%= f.button :submit %>
+    </div>
+  <% end %>
+<% end %>

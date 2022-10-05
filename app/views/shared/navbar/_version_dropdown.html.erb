@@ -23,7 +23,14 @@
             </svg>
           </span>
         <% else %>
-          <%= link_to "v#{version.number}", version_path(version.number), class: "text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900" %>
+          <%= link_to "v#{version.number}", version_path(version), class: "text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900" %>
+        <% end %>
+      <% end %>
+      <% if current_user&.admin? %>
+        <hr class="my-1">
+        <%= link_to new_version_path, class: "text-gray-400 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900 flex items-center justify-center" do %>
+          <%= heroicon "plus-small", options: { class: "mr-1" } %>
+          New version
         <% end %>
       <% end %>
     </div>
