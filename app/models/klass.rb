@@ -6,4 +6,5 @@ class Klass < ApplicationRecord
   has_many :sections, -> { order(name: :asc) }, dependent: :destroy
 
   validates :name, presence: true
+  validates :summary, presence: true, length: { maximum: 140 }
 end
