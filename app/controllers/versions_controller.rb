@@ -7,7 +7,8 @@ class VersionsController < ApplicationController
   end
 
   def show
-    redirect_to version_redirect_path(@version.number), status: :see_other
+    flash.keep
+    redirect_to version_redirect_path(@version.number), status: :moved_permanently
   end
 
   def new

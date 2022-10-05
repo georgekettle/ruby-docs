@@ -1,6 +1,6 @@
 class KlassesController < ApplicationController
   layout "documentation", only: [:show_redirect]
-  skip_before_action :authenticate_user!, only: [:show]
+  skip_before_action :authenticate_user!, only: [:show, :show_redirect]
   before_action :set_klass, only: [:show, :edit, :update, :destroy]
 
   def show_redirect
@@ -11,7 +11,8 @@ class KlassesController < ApplicationController
   end
 
   def show
-    redirect_to klass_redirect_path(@klass.version.number, @klass.name), status: :see_other # check this status
+    flash.keep
+    redirect_to klass_redirect_path(@klass.version.number, @klass.name), status: :moved_permanently # check this status
   end
 
   def new
@@ -53,7 +54,7 @@ class KlassesController < ApplicationController
   end
 
   def klass_name
-    params[:klass_name]&.capitalize
+    params[:klass_name]
   end
 
   def klass_params

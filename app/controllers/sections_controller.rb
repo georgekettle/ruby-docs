@@ -13,7 +13,8 @@ class SectionsController < ApplicationController
   end
 
   def show
-    redirect_to section_redirect_path(@section.version.number, @section.klass.name, @section.name), status: :see_other
+    flash.keep
+    redirect_to section_redirect_path(@section.version.number, @section.klass.name, @section.name), status: :moved_permanently
   end
 
   def new
