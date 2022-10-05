@@ -1,9 +1,17 @@
-<h1>Edit klass</h1>
+<%= render 'components/containers/medium' do %>
+  <p class="mb-1 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400"><%= @klass.name %></p>
+  <h1 class="mb-5 inline-block text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-200">Edit class</h1>
 
-<%= simple_form_for @klass do |f| %>
-  <%= f.input :name %>
-  <%= f.association :version %>
-  <%= f.input :summary %>
-  <%= f.input :content %>
-  <%= f.submit %>
+  <%= simple_form_for @klass do |f| %>
+    <div class="space-y-5">
+      <%= f.input :name, placeholder: "Name of class" %>
+      <%= f.association :version, label_method: :number, value_method: :id %>
+      <div data-controller="character-counter">
+        <%= f.input :summary, as: :text, placeholder: "Description of class", maxlength: 140, input_html: { data: { character_counter_target: "input", controller: "textarea-autogrow" }} %>
+        <p class='text-xs text-right text-slate-400 dark:text-slate-600 block mt-1 italic'><span data-character-counter-target="counter">0</span>/140</p>
+      </div>
+      <%= f.input :content, placeholder: "Content for info page", input_html: { data: { controller: "textarea-autogrow" }} %>
+      <%= f.button :submit, "Update class" %>
+    </div>
+  <% end %>
 <% end %>
