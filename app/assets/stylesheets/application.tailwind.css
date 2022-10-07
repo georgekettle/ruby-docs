@@ -11,4 +11,9 @@
 }
 
 */
-@import 'actiontext.css';
+
+@layer components {
+  .trix-button-row .trix-button {
+    @apply bg-red-600;
+  }
+}

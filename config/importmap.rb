@@ -12,3 +12,4 @@ pin "stimulus-character-counter", to: "https://ga.jspm.io/npm:stimulus-character
 pin "stimulus-textarea-autogrow", to: "https://ga.jspm.io/npm:stimulus-textarea-autogrow@4.0.0/dist/stimulus-textarea-autogrow.es.js"
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.js"
+pin "highlight.js", to: "https://ga.jspm.io/npm:highlight.js@11.6.0/es/index.js"
