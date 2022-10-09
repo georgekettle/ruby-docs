@@ -37,7 +37,9 @@ base0F  #a16946  Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php 
 pre code.hljs {
   display: block;
   overflow-x: auto;
-  padding: 1em;
+  padding: 0px;
+  font-size: .875em;
+  font-family: 'Fira Code', 'ui-monospace';
 }
 
 code.hljs {
@@ -46,12 +48,12 @@ code.hljs {
 
 .hljs {
   color: #d8d8d8;
-  background: #181818;
+  background: transparent;
 }
 
 .hljs::selection,
 .hljs ::selection {
-  background-color: #383838;
+  background-color: transparent;
   color: #d8d8d8;
 }
 
@@ -90,7 +92,7 @@ code.hljs {
 .hljs-selector-tag,
 .hljs-name,
 .hljs-deletion {
-  color: #ab4642;
+  color: #fc5a54;
 }
 
 /* base09 - Integers, Boolean, Constants, XML Attributes, Markup Link Url */
@@ -100,7 +102,7 @@ code.hljs {
 .hljs-attr,
 .hljs-variable.constant_,
 .hljs-literal {
-  color: #dc9656;
+  color: #ffde37;
 }
 
 /* base0A - Classes, Markup Bold, Search Text Background */
@@ -121,7 +123,7 @@ code.hljs {
 .hljs-addition,
 .hljs-title.class_.inherited__,
 .hljs-string {
-  color: #a1b56c;
+  color: #c6f349;
 }
 
 /* base0C - Support, Regular Expressions, Escape Characters, Markup Quotes */
@@ -130,7 +132,7 @@ code.hljs {
 .hljs-quote,
 .hljs-keyword.hljs-atrule,
 .hljs-regexp {
-  color: #86c1b9;
+  color: #5ee2d1;
 }
 
 /* base0D - Functions, Methods, Attribute IDs, Headings */
@@ -151,10 +153,10 @@ code.hljs {
 .hljs-template-tag,
 .diff .hljs-meta,
 .hljs-keyword {
-  color: #ba8baf;
+  color: #fa65d8;
 }
 .hljs-emphasis {
-  color: #ba8baf;
+  color: #fa65d8;
   font-style: italic;
 }
 
@@ -167,13 +169,13 @@ code.hljs {
 .hljs-meta .hljs-keyword,
 .hljs-meta .hljs-string
 {
-  color: #a16946;
+  color: #ff9737;
 }
 
 .hljs-meta .hljs-keyword,
 /* for v10 compatible themes */
 .hljs-meta-keyword {
-  font-weight: bold;
+  // font-weight: bold;
 }
 
 
@@ -186,7 +188,8 @@ Dark style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Or
 
 .hljs {
   color: #ddd;
-  background: #303030;
+  background: transparent;
+  padding: 0px;
 }
 
 .hljs-keyword,
@@ -194,7 +197,7 @@ Dark style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Or
 .hljs-literal,
 .hljs-section,
 .hljs-link {
-  color: white;
+  color: #ff9737;
 }
 
 
@@ -214,14 +217,14 @@ Dark style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Or
 .hljs-variable,
 .hljs-template-tag,
 .hljs-template-variable {
-  color: #d88;
+  color: #ff6852;
 }
 
 .hljs-comment,
 .hljs-quote,
 .hljs-deletion,
 .hljs-meta {
-  color: #979797;
+  color: rgb(100, 116, 139);
 }
 
 .hljs-keyword,
@@ -233,7 +236,7 @@ Dark style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Or
 .hljs-type,
 .hljs-name,
 .hljs-strong {
-  font-weight: bold;
+  // font-weight: bold;
 }
 
 .hljs-emphasis {
