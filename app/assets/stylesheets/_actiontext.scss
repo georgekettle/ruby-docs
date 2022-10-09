@@ -12,6 +12,13 @@
  * images in galleries will be squished by the max-width: 33%; rule.
 */
 
+trix-toolbar {
+  .trix-active {
+    background-color:rgb(30, 41, 59);
+    color: white;
+  }
+}
+
 .trix-content,
 trix-editor {
   .attachment-gallery > action-text-attachment,
@@ -34,6 +41,19 @@ trix-editor {
     max-width: 100% !important;
   }
 
+  div {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    color: #334155;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  
+  strong {
+    color: #0f172a;
+    font-weight: 600;
+  }
+
   pre {
     display: inline-block;
     width: 100%;
@@ -43,14 +63,79 @@ trix-editor {
     padding: 1.25rem;
     border-radius: 0.5rem;
     white-space: pre;
-    background-color: #181818;
+    background-color: rgb(30, 41, 59);
     overflow-x: auto;
     color: white;
   }
+
+  h2 {
+    color: rgb(240, 49, 20);
+    letter-spacing: 0;
+    line-height: 1.5rem;
+    font-weight: 600;
+    font-size: .875rem;
+    padding-left: 1rem;
+    white-space: pre-wrap;
+    display: flex;
+    margin-left: -1rem;
+    margin-bottom: 0.5rem;
+    scroll-margin-top: 158px;
+    border-color: transparent;
+  }
+
+  h3 {
+    color: #0f172a;
+    font-weight: 600;
+    font-size: 1.25em;
+    margin-bottom: 0.6em;
+    line-height: 1.4;
+    margin-top: 0;
+  }
+
+  a {
+    color: #0f172a;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid rgb(240, 49, 20);
+
+    &:hover {
+      border-bottom: 2px solid rgb(240, 49, 20);
+    }
+  }
 }
 
+.dark {
+  .trix-content,
+  trix-editor {
+    color: rgb(148, 163, 184);
 
+    div {
+      color: #94a3b8;
+    }
+    
+    pre {
+      background-color: rgb(30, 41, 59);
+    }
 
+    h2 {
+      color: rgb(255, 105, 82);
+    }
 
+    h3 {
+      color: #e2e8f0;
+    }
 
+    a {
+      color: #fff;
+      border-bottom: 1px solid rgb(255, 105, 82);
 
+      &:hover {
+        border-bottom: 2px solid rgb(255, 105, 82);
+      }
+    }
+
+    strong {
+      color: #fff;
+    }
+  }
+}

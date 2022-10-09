@@ -10,7 +10,7 @@
         <%= f.input :summary, as: :text, placeholder: "Description of class", maxlength: 140, input_html: { data: { character_counter_target: "input", controller: "textarea-autogrow" }} %>
         <p data-character-counter-target="counter" class='text-xs text-right text-slate-400 dark:text-slate-600 block mt-1'>140</p>
       </div>
-      <%= f.input :content, as: :rich_text_area, placeholder: "Content for info page", input_html: { data: { controller: "textarea-autogrow" }} %>
+      <%= f.input :content, as: :rich_text_area, placeholder: "Content for info page" %>
       <%= f.button :submit %>
     </div>
   <% end %>
