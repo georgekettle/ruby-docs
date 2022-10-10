@@ -35,5 +35,11 @@
     </div>
     <p class="mt-2 text-lg text-slate-700 dark:text-slate-400"><%= @section.summary %></p>
   </header>
-  <%= @section.content %>
+  <div>
+    <h2 class="mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400">How to use</h2>
+    <h3 class="text-xl font-medium tracking-tight">Ruby docs</h3>
+    <div class="-mt-2">
+      <%= @section.rubydocs_says %>
+    </div>
+  </div>
 </div>

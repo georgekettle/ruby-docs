@@ -1,6 +1,6 @@
 class SectionsController < ApplicationController
   layout "documentation", only: [:show_redirect]
-  skip_before_action :authenticate_user!, only: [:show]
+  skip_before_action :authenticate_user!, only: [:show, :show_redirect]
   before_action :set_section, only: [:show, :edit, :update, :destroy]
   before_action :set_klass, only: [:new, :create]
 
@@ -58,7 +58,7 @@ class SectionsController < ApplicationController
   end
 
   def section_params
-    params.require(:section).permit(:name, :category, :summary, :content)
+    params.require(:section).permit(:name, :category, :summary, :rubydocs_says)
   end
 
   def set_section

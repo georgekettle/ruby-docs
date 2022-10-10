@@ -12,7 +12,7 @@ class Section < ApplicationRecord
   belongs_to :klass
   has_one :version, through: :klass
 
-  has_rich_text :content
+  has_rich_text :rubydocs_says
   
   validates :name, presence: true, uniqueness: { scope: [:category, :klass_id], message: "should be unique in it's class & category" }
   validates :category, presence: true
