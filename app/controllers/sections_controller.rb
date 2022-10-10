@@ -9,7 +9,7 @@ class SectionsController < ApplicationController
   def show_redirect
     @version = Version.find_by_number(params[:version_number])
     @klass = Klass.find_by(name: klass_name, version: @version)
-    @section = Section.find_by(name: section_name, category: section_category, klass: @klass)
+    @section = Section.find_by(name: section_name, category: section_category, klass: @klass) || not_found
     breadcrumb @klass.name, "#"
     breadcrumb @section.name, klass_path(@klass)
   end
