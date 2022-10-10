@@ -1,6 +1,6 @@
 class VersionsController < ApplicationController
   layout "documentation", only: [:show_redirect]
-  skip_before_action :authenticate_user!, only: [:show]
+  skip_before_action :authenticate_user!, only: [:show, :show_redirect]
   before_action :set_version, only: [:show, :edit, :update, :destroy]
   
   def show_redirect
