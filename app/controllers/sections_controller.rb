@@ -4,17 +4,19 @@ class SectionsController < ApplicationController
   before_action :set_section, only: [:show, :edit, :update, :destroy]
   before_action :set_klass, only: [:new, :create]
 
+  SECTION_PARAMS_REGEX = /^(?<cat>#{Section.categories.keys.join('|')})-(?<name>.+)$/i
+
   def show_redirect
     @version = Version.find_by_number(params[:version_number])
     @klass = Klass.find_by(name: klass_name, version: @version)
-    @section = Section.find_by(name: section_name, klass: @klass)
+    @section = Section.find_by(name: section_name, category: section_category, klass: @klass) || not_found
     breadcrumb @klass.name, "#"
     breadcrumb @section.name, klass_path(@klass)
   end
 
   def show
     flash.keep
-    redirect_to section_redirect_path(@section.version.number, @section.klass.name, @section.name), status: :moved_permanently
+    redirect_to section_redirect_path(@section.version.number, @section.klass.name, "#{@section.category}-#{@section.name}"), status: :moved_permanently
   end
 
   def new
@@ -54,7 +56,11 @@ class SectionsController < ApplicationController
   end
 
   def section_name
-    params[:section_name]
+    params[:section].match(SECTION_PARAMS_REGEX)[:name] if params[:section].match?(SECTION_PARAMS_REGEX)
+  end
+
+  def section_category
+    params[:section].match(SECTION_PARAMS_REGEX)[:cat] if params[:section].match?(SECTION_PARAMS_REGEX)
   end
 
   def section_params
