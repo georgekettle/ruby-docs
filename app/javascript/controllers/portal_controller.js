@@ -1,5 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 import hotkeys from 'hotkeys-js'
+hotkeys.filter = (e) => {
+  return true // allows hotkeys to be active even when inside of editable fields like inputs etc
+}
 
 // Connects to data-controller="portal"
 export default class extends Controller {
@@ -32,10 +35,6 @@ export default class extends Controller {
     this.portalTarget.insertAdjacentElement('beforeend', this.contentTarget)
     this._addEventListenersToCloseButtons()
     this._focusAutofocusTargets()
-  }
-
-  close(event) {
-    // See _close method below
   }
   
   _close(e) {
