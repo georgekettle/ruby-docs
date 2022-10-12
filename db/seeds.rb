@@ -15,7 +15,19 @@ puts "Creating Ruby classes (Klass)"
 klasses = %w(String Integer Array Hash Symbol)
 Version.all.each do |version|
 	# build Object
+	puts "Creating Object for ruby version #{version.number}"
 	object = Klass.create!(name: "Object", version: Version.first, summary: "Object is the default root of all Ruby objects. All classes inherit from Object and this makes all Object methods available unless explicitly overridden.")
+	puts "- Creating instance methods"
+	Object.instance_methods.each do |instance_method|
+		puts "-- #{instance_method}"
+		Section.create!(name: instance_method, category: "instance_method", klass: object, summary: "Random default summary")
+	end
+	puts "- Creating class methods"
+	Object.methods(false).each do |class_method|
+		puts "-- #{class_method}"
+		Section.create!(name: class_method, category: "class_method", klass: object, summary: "Random default summary")
+	end
+
 	# build klasses that inherit from Object
 	klasses.each do |klass_name|
 		puts "Creating #{klass_name} for ruby version #{version.number}"
