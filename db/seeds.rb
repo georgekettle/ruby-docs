@@ -2,7 +2,14 @@ if Rails.env == "development"
 	Section.destroy_all
 	Klass.destroy_all
 	Version.destroy_all
+	User.destroy_all
 end
+
+puts "Creating admin user"
+password = "secret"
+admin = User.create!(email: "test@test.com", password: password, admin: true)
+puts "- Created user with email: #{admin.email} & password: #{password}"
+puts "Finished creating admin user"
 
 puts "Creating Ruby versions"
 versions = [RUBY_VERSION.match(/\d\.\d/)[0]]
