@@ -18,7 +18,7 @@
             </svg>
           </button>
           <ul class="space-y-6">
-            <% Current.version.klasses.each do |klass| %>
+            <% Current.version.main_klasses.each do |klass| %>
               <li>
                 <%= link_to klass.name, klass_path(klass), class: "hover:text-primary-500 dark:hover:text-primary-400" %>
               </li>

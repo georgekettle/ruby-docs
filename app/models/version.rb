@@ -8,4 +8,8 @@ class Version < ApplicationRecord
 	has_many :sections, through: :klasses
 	
 	validates :number, presence: true
+
+	def main_klasses
+		klasses.where(main_menu: true)
+	end
 end

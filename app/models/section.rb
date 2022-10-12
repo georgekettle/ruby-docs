@@ -4,9 +4,7 @@ class Section < ApplicationRecord
   
   CATEGORY_HEADERS = {
     "instance_method" => "Instance Methods",
-    "class_method" => "Class Methods",
-    "included_module" => "Included Modules",
-    "inherits_from_parent" => "Parent"
+    "class_method" => "Class Methods"
   }
   
   belongs_to :klass
