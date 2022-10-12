@@ -43,6 +43,10 @@
                 </li>
               <% end %>
                 
+              <% if @klass.parent.present? %>
+                <%= render 'components/documentation/parents', klass: @klass.parent %>
+              <% end %>
+              
               <% if @klass %>
                 <% Section.categories.keys.reverse.each do |cat| %>
                   <%= render 'sections/section_category', klass: @klass, category: cat %>
