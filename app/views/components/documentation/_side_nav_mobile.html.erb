@@ -43,7 +43,7 @@
                 </li>
               <% end %>
                 
-              <% if @klass.parent.present? %>
+              <% if @klass&.parent.present? %>
                 <%= render 'components/documentation/parents', klass: @klass.parent %>
               <% end %>
               
