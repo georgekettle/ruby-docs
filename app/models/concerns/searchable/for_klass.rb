@@ -1,31 +1,25 @@
 module Searchable::ForKlass
   extend ActiveSupport::Concern
- 
+  include Searchable::AlgoliaSidekiqClassMethods
+  
   included do
-    after_touch :index!
     after_save :trigger_update_associations
 
-    algoliasearch per_environment: true do
-      attribute :name, :id, :created_at
+    algoliasearch index_name: "docs", enqueue: :trigger_sidekiq_worker do
+      attribute :name, :id, :created_at, :class
       add_attribute :version_number
 
       attributesForFaceting [:version_number, :class]
 
       searchableAttributes ['name', 'unordered(version_number)']
-    
-      add_index "docs", id: :algolia_id do
-        attribute :name, :id, :created_at, :class
-        add_attribute :version_number
-
-        attributesForFaceting [:version_number, :class]
-
-        searchableAttributes ['name', 'unordered(version_number)']
-      end
     end
   end
 
   def trigger_update_associations
-    sections.each(&:touch)
+    sections.each do |section|
+      serialized_record = section.to_global_id.to_s
+      AlgoliaUpdateJob.perform_later(serialized_record, section.id, false)
+    end
   end
 
   private
