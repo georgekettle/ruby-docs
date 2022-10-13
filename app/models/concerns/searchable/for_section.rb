@@ -1,9 +1,10 @@
 module Searchable::ForSection
   extend ActiveSupport::Concern
   include Searchable::AlgoliaSidekiqClassMethods
+  include Searchable::AlgoliaId
   
   included do
-    algoliasearch index_name: "docs", enqueue: :trigger_sidekiq_worker do
+    algoliasearch index_name: "docs_#{Rails.env}", id: :algolia_id, enqueue: :trigger_sidekiq_worker do
       attribute :name, :category, :id, :created_at, :class
       add_attribute :version_number
       add_attribute :klass_name
@@ -22,9 +23,5 @@ module Searchable::ForSection
 
   def version_number
     version.number
-  end
-
-  def algolia_id
-    "section_#{id}" # ensure the version, klass & section IDs are not conflicting
   end
 end

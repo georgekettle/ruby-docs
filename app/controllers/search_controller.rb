@@ -12,7 +12,7 @@ class SearchController < ApplicationController
   end
 
   def index
-    i = client.init_index('docs')
+    i = client.init_index("docs_#{Rails.env}")
     i.set_settings({
       attributesForFaceting: [
         'filterOnly(version_number)' # for filtering purposes only
