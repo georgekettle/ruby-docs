@@ -10,14 +10,4 @@ class SearchController < ApplicationController
   def client
     Algolia::Search::Client.create(ENV["ALGOLIA_ID"], ENV["ALGOLIA_ADMIN_API_KEY"])
   end
-
-  def index
-    i = client.init_index("docs_#{Rails.env}")
-    i.set_settings({
-      attributesForFaceting: [
-        'filterOnly(version_number)' # for filtering purposes only
-      ]
-    })
-    return i
-  end
 end

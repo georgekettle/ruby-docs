@@ -11,7 +11,7 @@ module Searchable::ForSection
 
       attributesForFaceting [:version_number, :klass_name, :class]
 
-      searchableAttributes ['unordered(name)', 'unordered(version_number)', 'unordered(klass_name)']
+      searchableAttributes ['name', 'unordered(version_number)', 'unordered(klass_name)']
     end
   end
 
