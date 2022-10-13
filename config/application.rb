@@ -22,5 +22,8 @@ module BeginnerRuby
     config.generators.assets = false
     config.generators.helper = false
     config.generators.test_framework = nil
+
+    # Sidekiq for background jobs
+    config.active_job.queue_adapter = :sidekiq
   end
 end

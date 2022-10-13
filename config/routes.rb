@@ -13,4 +13,9 @@ Rails.application.routes.draw do
     resources :sections, only: [:new, :create]
   end
   resources :sections, only: [:show, :edit, :update, :destroy]
+
+  require "sidekiq/web"
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

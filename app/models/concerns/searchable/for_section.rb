@@ -1,27 +1,17 @@
 module Searchable::ForSection
   extend ActiveSupport::Concern
+  include Searchable::AlgoliaSidekiqClassMethods
+  include Searchable::AlgoliaId
   
   included do
-    after_touch :index!
-
-    algoliasearch per_environment: true do
-      attribute :name, :category, :id, :created_at
+    algoliasearch index_name: "docs_#{Rails.env}", id: :algolia_id, enqueue: :trigger_sidekiq_worker do
+      attribute :name, :category, :id, :created_at, :class
       add_attribute :version_number
       add_attribute :klass_name
 
       attributesForFaceting [:version_number, :klass_name, :class]
 
-      searchableAttributes ['unordered(name)', 'unordered(version_number)', 'unordered(klass_name)']
-    
-      add_index "docs", id: :algolia_id do
-        attribute :name, :category, :id, :created_at, :class
-        add_attribute :version_number
-        add_attribute :klass_name
-
-        attributesForFaceting [:version_number, :klass_name, :class]
-
-        searchableAttributes ['unordered(name)', 'unordered(version_number)', 'unordered(klass_name)']
-      end
+      searchableAttributes ['name', 'unordered(version_number)', 'unordered(klass_name)']
     end
   end
 
@@ -33,9 +23,5 @@ module Searchable::ForSection
 
   def version_number
     version.number
-  end
-
-  def algolia_id
-    "section_#{id}" # ensure the version, klass & section IDs are not conflicting
   end
 end

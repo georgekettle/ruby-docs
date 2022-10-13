@@ -29,7 +29,7 @@ class AlgoliaDocsIndexSearcher
   end
 
   def set_index
-    i = algolia_client.init_index('docs')
+    i = algolia_client.init_index("docs_#{Rails.env}")
     i.set_settings({
       attributesForFaceting: [
         'filterOnly(version_number)',
