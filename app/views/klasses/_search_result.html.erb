@@ -6,7 +6,7 @@
         <% if resolve_asset_path("#{klass.name&.downcase}.svg") %>
           <%= image_tag "#{klass.name&.downcase}.svg", class:"h-6 w-6" %>
         <% else %>
-          <%= heroicon 'sparkles', options: { class:"h-4 w-4 m-1 group-hover:text-primary-500" } %>
+          <%= heroicon 'sparkles', options: { class:"h-4 w-4 m-1 group-hover:text-primary-500 dark:group-hover:text-slate-800" } %>
         <% end %>
       </div>
       <%# image_tag 'hashtag.svg', class: "mr-4 h-6 rounded-md bg-white fill-primary-500 ring-1 ring-slate-900/5 shadow-sm group-hover:shadow group-hover:ring-slate-900/10 dark:ring-0 dark:shadow-none dark:group-hover:shadow-none dark:group-hover:highlight-white/10 group-hover:shadow-slate-200 dark:group-hover:bg-slate-100 dark:bg-slate-700 dark:highlight-white/5" %>
