@@ -12,8 +12,8 @@
       </div>
       <%# image_tag 'hashtag.svg', class: "mr-4 h-6 rounded-md bg-white fill-primary-500 ring-1 ring-slate-900/5 shadow-sm group-hover:shadow group-hover:ring-slate-900/10 dark:ring-0 dark:shadow-none dark:group-hover:shadow-none dark:group-hover:highlight-white/10 group-hover:shadow-slate-200 dark:group-hover:bg-slate-100 dark:bg-slate-700 dark:highlight-white/5" %>
       <div>
-        <p class="text-xs font-semibold py-1 px-2 rounded-full bg-slate-100 inline-block group-hover:text-white group-hover:bg-white/10 mb-1 dark:bg-black/10"><%= section.formatted_name %></p>
-        <h5 class="font-normal text-sm group-hover:text-primary-300 text-slate-400 dark:group-hover:text-slate-400"><%= section.category_header&.pluralize(1) %> Short explanation of method</h5>
+        <p class="text-xs font-semibold py-1 px-2 rounded-full bg-slate-100 inline-block group-hover:text-white group-hover:bg-white/10 mb-1 dark:bg-black/10"><span class="opacity-40 group-hover:opacity-50"><%= section.klass.name %></span> <%= section.formatted_name %></p>
+        <h5 class="font-normal text-sm group-hover:text-primary-300 text-slate-400 dark:group-hover:text-slate-400"><%= section.summary %></h5>
       </div>
     </div>
   <% end %>
