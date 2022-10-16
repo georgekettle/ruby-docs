@@ -17,7 +17,7 @@ class RubyDocsScraper
 
   def classes
     class_names = @nok_doc.search('#class-index .entries .class a').map{ |c| c&.text&.strip }
-    class_names.map do |c_name|
+    class_names.first(3).map do |c_name|
       puts c_name
       c_name_for_url = c_name.gsub("::", "/")
       url = @base_url + "/#{c_name_for_url}.html"
@@ -75,7 +75,15 @@ class RubyDocsScraper
   end
 
   def content(name)
-    @class_nok_doc.search("[id='#{method_id(name)}'] > div").last.inner_html.strip
+    html = @class_nok_doc.search("[id='#{method_id(name)}'] > div").last
+    html.search('p').each{|el| el.name = 'div'} # substitute p tags for div tags (ActionText preference)
+    # html.xpath('//@*').remove # remove all attributes
+    html.traverse do |node| 
+      node.keys.each do |attribute|
+        node.delete attribute unless attribute == 'href'
+      end
+    end
+    html.inner_html.strip
   end
 
   def method_id(name)
