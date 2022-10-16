@@ -1,4 +1,4 @@
-# README
+# rubydocs
 
 This is a recreation of the ruby docs with the aim to make the documentation easier to navigate/search/understand for beginners to the language.
 
