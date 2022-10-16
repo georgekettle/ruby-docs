@@ -321,6 +321,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   loaf
+  nokogiri
   pg (~> 1.1)
   pry-rails
   puma (~> 5.0)
