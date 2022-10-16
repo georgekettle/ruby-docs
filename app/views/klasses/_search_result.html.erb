@@ -2,8 +2,12 @@
 <li class="pb-2">
   <%= link_to klass_path(klass), data: {turbo_frame: "_top"}, class: "group p-4 bg-slate-50 rounded-xl inline-block w-full hover:bg-primary-500 hover:text-white dark:bg-slate-700 dark:hover:bg-slate-900 dark:hover:text-slate-300" do %>
     <div class="flex items-center">
-      <div class="shrink-0 mr-4 w-6 h-6 flex items-center justify-center rounded-md bg-white inline-block text-slate-400 group-hover:text-white dark:group-hover:text-slate-800 ring-1 ring-slate-900/5 shadow-sm group-hover:shadow-none group-hover:ring-primary-400 dark:ring-0 dark:shadow-none dark:group-hover:shadow-none dark:group-hover:highlight-white/10 group-hover:shadow-primary-200 dark:group-hover:bg-slate-200 dark:bg-slate-700 dark:highlight-white/5">
-        <%= image_tag "#{klass.name&.downcase}.svg", class:"h-6 w-6" %>
+      <div class="shrink-0 mr-4 w-6 h-6 flex items-center justify-center rounded-md bg-white text-slate-400 group-hover:text-white dark:group-hover:text-slate-800 ring-1 ring-slate-900/5 shadow-sm group-hover:shadow-none group-hover:ring-primary-400 dark:ring-0 dark:shadow-none dark:group-hover:shadow-none dark:group-hover:highlight-white/10 group-hover:shadow-primary-200 dark:group-hover:bg-slate-200 dark:bg-slate-700 dark:highlight-white/5">
+        <% if resolve_asset_path("#{klass.name&.downcase}.svg") %>
+          <%= image_tag "#{klass.name&.downcase}.svg", class:"h-6 w-6" %>
+        <% else %>
+          <%= heroicon 'sparkles', options: { class:"h-4 w-4 m-1 group-hover:text-primary-500" } %>
+        <% end %>
       </div>
       <%# image_tag 'hashtag.svg', class: "mr-4 h-6 rounded-md bg-white fill-primary-500 ring-1 ring-slate-900/5 shadow-sm group-hover:shadow group-hover:ring-slate-900/10 dark:ring-0 dark:shadow-none dark:group-hover:shadow-none dark:group-hover:highlight-white/10 group-hover:shadow-slate-200 dark:group-hover:bg-slate-100 dark:bg-slate-700 dark:highlight-white/5" %>
       <div>
