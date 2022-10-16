@@ -1,11 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+This is a recreation of the ruby docs with the aim to make the documentation easier to navigate/search/understand for beginners to the language.
 
 * Ruby version
+3.1.2
 
 * System dependencies
 
