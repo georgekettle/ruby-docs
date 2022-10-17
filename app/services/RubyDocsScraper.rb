@@ -18,7 +18,6 @@ class RubyDocsScraper
   def classes
     class_names = @nok_doc.search('#class-index .entries .class a').map{ |c| c&.text&.strip }
     class_names.first(3).map do |c_name|
-      puts c_name
       c_name_for_url = c_name.gsub("::", "/")
       url = @base_url + "/#{c_name_for_url}.html"
       html_file = URI.open(url).read
@@ -49,7 +48,6 @@ class RubyDocsScraper
   end
 
   def build_method(name, anchor)
-    puts "- #{name}"
     match_data = name.match(/(?<category>::|#)(?<name>.+)/)
     name = match_data[:name]
     category = (case match_data[:category]
