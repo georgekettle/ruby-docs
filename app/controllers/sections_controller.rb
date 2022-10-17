@@ -52,7 +52,7 @@ class SectionsController < ApplicationController
   private
 
   def klass_name
-    params[:klass_name]&.capitalize
+    params[:klass_name]
   end
 
   def section_name
