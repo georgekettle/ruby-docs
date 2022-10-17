@@ -192,6 +192,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.8-x86_64-linux)
+      racc (~> 1.4)
     open-uri (0.2.0)
       stringio
       time
@@ -280,6 +282,8 @@ GEM
     strscan (3.0.4)
     tailwindcss-rails (2.0.12-x86_64-darwin)
       railties (>= 6.0.0)
+    tailwindcss-rails (2.0.12-x86_64-linux)
+      railties (>= 6.0.0)
     thor (1.2.1)
     time (0.2.0)
       date
@@ -312,6 +316,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   algolia
