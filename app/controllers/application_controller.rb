@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-  include Versionable
-
   before_action :authenticate_user!
+
+  include Versionable, Authorizable
 
   private
 
