@@ -10,5 +10,4 @@ class Klass < ApplicationRecord
   has_rich_text :content
 
   validates :name, presence: true
-  validates :summary, presence: true, length: { maximum: 200 }
 end
