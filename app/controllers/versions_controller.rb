@@ -4,6 +4,8 @@ class VersionsController < ApplicationController
   before_action :set_version, only: [:show, :edit, :update, :destroy]
   
   def show_redirect
+    @version = Version.find_by_number(params[:version_number])
+    authorize @version
   end
 
   def show
@@ -13,10 +15,12 @@ class VersionsController < ApplicationController
 
   def new
     @version = Version.new
+    authorize @version
   end
 
   def create
     @version = Version.new(version_params)
+    authorize @version
     if @version.save
       redirect_to version_redirect_path(@version.number, format: :html), status: :see_other, notice: "Version successfully created"
     else
@@ -48,5 +52,6 @@ class VersionsController < ApplicationController
 
   def set_version
     @version = Version.find(params[:id])
+    authorize @version
   end
 end
