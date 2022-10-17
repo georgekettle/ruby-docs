@@ -72,6 +72,14 @@ trix-editor {
     }
   }
 
+  code {
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: #f0f0f0;
+    border: 1px solid #e1e1e1;
+    font-family: 'Fira Code', 'ui-monospace', monospace;
+  }
+
   h2 {
     color: rgb(240, 49, 20);
     letter-spacing: 0;
@@ -119,6 +127,11 @@ trix-editor {
     
     pre {
       background-color: rgb(30, 41, 59);
+    }
+
+    code {
+      background: #1e293b;
+      border: 1px solid #2b3442;
     }
 
     h2 {
