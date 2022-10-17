@@ -6,6 +6,7 @@ class KlassesController < ApplicationController
   def show_redirect
     @version = Version.find_by_number(params[:version_number])
     @klass = Klass.find_by(name: klass_name, version: @version)
+    authorize @klass
     breadcrumb @klass.name, "#"
     breadcrumb "Overview", klass_path(@klass)
   end
@@ -18,10 +19,12 @@ class KlassesController < ApplicationController
   def new
     @version = Version.find(params[:version_id])
     @klass = Klass.new
+    authorize @klass
   end
 
   def create
     @klass = Klass.new(klass_params)
+    authorize @klass
     @version = Version.find(params[:version_id])
     @klass.version = @version
     if @klass.save
@@ -51,6 +54,7 @@ class KlassesController < ApplicationController
 
   def set_klass
     @klass = Klass.find(params[:id])
+    authorize @klass
   end
 
   def klass_name

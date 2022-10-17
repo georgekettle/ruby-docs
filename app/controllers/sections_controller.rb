@@ -10,6 +10,7 @@ class SectionsController < ApplicationController
     @version = Version.find_by_number(params[:version_number])
     @klass = Klass.find_by(name: klass_name, version: @version)
     @section = Section.find_by(name: section_name, category: section_category, klass: @klass) || not_found
+    authorize @section
     breadcrumb @klass.name, "#"
     breadcrumb @section.name, klass_path(@klass)
   end
@@ -21,10 +22,12 @@ class SectionsController < ApplicationController
 
   def new
     @section = Section.new
+    authorize @section
   end
 
   def create
     @section = Section.new(section_params)
+    authorize @section
     @section.klass = @klass
     if @section.save
       redirect_to section_path(@section), status: :see_other, notice: "Section successfully created"
@@ -69,6 +72,7 @@ class SectionsController < ApplicationController
 
   def set_section
     @section = Section.find(params[:id])
+    authorize @section
   end
 
   def set_klass
