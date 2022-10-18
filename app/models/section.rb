@@ -10,7 +10,7 @@ class Section < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: [:category, :klass_id], message: "should be unique in it's class & category" }
   validates :category, presence: true
 
-  enum category: { instance_method: 0, class_method: 1, included_module: 2, inherits_from_parent: 3 }
+  enum category: { instance_method: 0, class_method: 1 }
 
   def formatted_name
     if instance_method?
