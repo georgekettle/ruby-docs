@@ -1,3 +1,7 @@
+<% set_meta_tags title: "Version #{@version.number}",
+                 description: "Documentation on ruby version #{@version.number}",
+                 keywords: "Ruby version #{@version.number}, Ruby v#{@version.number}, Ruby, Ruby docs" %>
+
 <% content_for :sub_nav do %>
   <%= render "components/documentation/sub_nav" %>
 <% end %>
@@ -54,7 +58,7 @@
     <div>
       <p class="mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400">Ruby version</p>
       <div class="flex items-center">
-        <h1 class="inline-block text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-200"><%= title "Version #{Current.version.number}", Current.version.number %></h1>
+        <h1 class="inline-block text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-200"><%= @version.number %></h1>
       </div>
     </div>
   </header>
