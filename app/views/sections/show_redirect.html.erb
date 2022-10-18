@@ -1,3 +1,7 @@
+<% set_meta_tags title: "#{@section.klass.name} #{@section.formatted_name}",
+                 description: @section.summary,
+                 keywords: "#{@section.name}, #{@section.klass.name} #{@section.formatted_name}, #{@section.category_header}, #{@section.klass.name}, Ruby version #{@section.version.number}, Ruby v#{@section.version.number}, Ruby, Ruby docs" %>
+
 <% content_for :sub_nav do %>
   <%= render "components/documentation/sub_nav" %>
 <% end %>
