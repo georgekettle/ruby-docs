@@ -142,6 +142,7 @@ GEM
       activesupport (>= 5.0)
     heroicon (1.0.0)
       rails (>= 5.2)
+    honeybadger (4.12.2)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -329,6 +330,7 @@ DEPENDENCIES
   dotenv-rails
   font-awesome-sass (~> 6.2.0)
   heroicon
+  honeybadger
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
