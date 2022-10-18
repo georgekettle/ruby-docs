@@ -1,7 +1,7 @@
 <section>
 	<div class="flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
 		<div class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
-				<h1 class="inline-block text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-200">Create account</h1>
+				<h1 class="inline-block text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-200"><%= title "Create account" %></h1>
 				<p class="mt-2 mb-5 text-base text-slate-600">Already have an account? <%= link_to "Sign in", new_user_session_path, class: "font-medium text-primary-600 transition-all duration-200 hover:text-primary-700 hover:underline focus:text-primary-700" %></p>
 
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { data: { turbo: false } }) do |f| %>
