@@ -192,6 +192,7 @@ GEM
       digest
       net-protocol
       timeout
+    newrelic_rpm (8.11.0)
     nio4r (2.5.8)
     nokogiri (1.13.8-x86_64-darwin)
       racc (~> 1.4)
@@ -338,6 +339,7 @@ DEPENDENCIES
   jbuilder
   loaf
   meta-tags
+  newrelic_rpm
   nokogiri
   open-uri
   pg (~> 1.1)
