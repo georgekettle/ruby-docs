@@ -272,6 +272,8 @@ GEM
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
+    skylight (5.3.4)
+      activesupport (>= 5.2.0)
     sprockets (4.1.1)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -350,6 +352,7 @@ DEPENDENCIES
   sidekiq
   sidekiq-failures (~> 1.0)
   simple_form
+  skylight
   sprockets-rails
   stimulus-rails
   tailwindcss-rails
