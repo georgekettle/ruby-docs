@@ -11,9 +11,7 @@
     <h2 class="mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400">Classes</h2>
     <h3 class="text-xl font-medium tracking-tight dark:text-slate-200">Main classes</h3>
     <%= turbo_frame_tag dom_id(@version, :main_classes), target: "_top", class: "mt-6 grid gap-4 md:grid-cols-2" do %>
-      <% @klasses.each do |klass| %>
-        <%= render 'klasses/klass', klass: klass %>
-      <% end %>
+      <%= render(partial: 'klasses/klass', collection: @klasses, cached: true) %>
     <% end %>
   </div>
 <% end %>
