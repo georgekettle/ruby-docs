@@ -1,0 +1,46 @@
+<% set_meta_tags title: @klass.name,
+                 description: @klass.summary,
+                 keywords: "#{@klass.name}, Ruby version #{@klass.version.number}, Ruby v#{@klass.version.number}, Ruby, Ruby docs" %>
+
+<% content_for :sub_nav do %>
+  <%= render "components/documentation/sub_nav" %>
+<% end %>
+
+<% content_for :side_nav do %>
+  <%= render "components/documentation/side_nav" %>
+<% end %>
+
+<div class="p-4">
+  <header id="header" class="relative z-20">
+    <div>
+      <p class="mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400">Class info</p>
+      <div class="flex items-center">
+        <h1 class="inline-block text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-200"><%= title @klass.name %></h1>
+      </div>
+    </div>
+    <p class="mt-2 text-lg text-slate-700 dark:text-slate-400"><%= @klass.summary %></p>
+  </header>
+  <div class="mt-8">
+    <h2 class="mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400">Included methods</h2>
+    <h3 class="text-xl font-medium tracking-tight dark:text-slate-200">Class methods</h3>
+    <p class="text-slate-400 mt-2 text-sm">These are methods that can be called on the class directly like <code><%= @klass.name %>.new</code></p>
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      <%= turbo_frame_tag dom_id(@klass, :class_methods), target: "_top" do %>
+        <% if @sections.present? %>
+          <% @sections.each do |section| %>
+            <%= render 'sections/section', section: section %>
+          <% end %>
+        <% else %>
+          <div class="md:col-span-2">
+            <%= render 'components/empty_state/container' do %>
+              <div class="flex items-center justify-center">
+                <%= heroicon 'information-circle', options: { class: "h-5 w-5 mr-2" } %>
+                <p>There are no class methods for <%= @klass.name %></p>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

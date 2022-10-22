@@ -4,7 +4,7 @@ class VersionsController < ApplicationController
   before_action :set_version, only: [:show, :edit, :update, :destroy]
   
   def show_redirect
-    @version = Version.find_by_number(params[:version_number])
+    @version = Version.includes(:klasses).find_by_number(params[:version_number])
     authorize @version
   end
 

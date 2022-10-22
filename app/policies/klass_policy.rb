@@ -20,4 +20,12 @@ class KlassPolicy < ApplicationPolicy
   def destroy?
     admin?
   end
+
+  def class_methods?
+    show?
+  end
+
+  def instance_methods?
+    show?
+  end
 end

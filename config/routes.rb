@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     resources :klasses, only: [:new, :create]
   end
   resources :klasses, only: [:show, :edit, :update, :destroy] do
+    member do
+      get :instance_methods
+      get :class_methods
+    end
     resources :sections, only: [:new, :create]
   end
   resources :sections, only: [:show, :edit, :update, :destroy]
