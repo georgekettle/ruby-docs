@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get "search", to: "search#search", as: :search
 
   resources :versions do
+    member do
+      get :main_classes
+      get :all_classes
+    end
     resources :klasses, only: [:new, :create]
   end
   resources :klasses, only: [:show, :edit, :update, :destroy] do

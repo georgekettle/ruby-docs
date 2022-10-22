@@ -20,4 +20,12 @@ class VersionPolicy < ApplicationPolicy
   def destroy?
     admin?
   end
+
+  def main_classes?
+    show?
+  end
+
+  def all_classes?
+    show?
+  end
 end
