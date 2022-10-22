@@ -108,6 +108,9 @@ group :development do
 
   # Only added to avoid "Object doesn't support #inspect" error in rails console with Section.new
   gem 'pry-rails'
+
+  # Highlights N+1 queries to be dealt with
+  gem 'bullet'
 end
 
 group :test do

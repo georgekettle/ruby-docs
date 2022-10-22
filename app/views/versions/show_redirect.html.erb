@@ -65,18 +65,18 @@
   <div class="mt-8">
     <h2 class="mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400">Classes</h2>
     <h3 class="text-xl font-medium tracking-tight dark:text-slate-200">Main classes</h3>
-    <div class="mt-6 grid gap-4 md:grid-cols-2">
-      <% @version.klasses.where(main_menu: true).each do |klass| %>
-        <%= render 'klasses/klass', klass: klass %>
+    <%= turbo_frame_tag dom_id(@version, :main_classes), src: main_classes_version_path(@version), target: "_top", class: "mt-6 grid gap-4 md:grid-cols-2" do %>
+      <% 2.times do %>
+        <%= render 'components/loading_state/card' %>
       <% end %>
-    </div>
+    <% end %>
   </div>
   <div class="mt-8">
     <h3 class="text-xl font-medium tracking-tight dark:text-slate-200">All classes</h3>
-    <div class="mt-6 grid gap-4 md:grid-cols-2">
-      <% @version.klasses.each do |klass| %>
-        <%= render 'klasses/klass', klass: klass %>
+    <%= turbo_frame_tag dom_id(@version, :all_classes), src: all_classes_version_path(@version), target: "_top", class: "mt-6 grid gap-4 md:grid-cols-2" do %>
+      <% 2.times do %>
+        <%= render 'components/loading_state/card' %>
       <% end %>
-    </div>
+    <% end %>
   </div>
 </div>

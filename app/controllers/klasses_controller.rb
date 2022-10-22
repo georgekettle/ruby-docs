@@ -1,7 +1,7 @@
 class KlassesController < ApplicationController
   layout "documentation", only: [:show_redirect]
-  skip_before_action :authenticate_user!, only: [:show, :show_redirect]
-  before_action :set_klass, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:show, :show_redirect, :instance_methods, :class_methods]
+  before_action :set_klass, only: [:show, :edit, :update, :destroy, :instance_methods, :class_methods]
 
   def show_redirect
     @version = Version.find_by_number(params[:version_number])
@@ -48,6 +48,14 @@ class KlassesController < ApplicationController
   def destroy
     @klass.destroy
     redirect_to version_path(@klass.version), status: :see_other, notice: "Successfully deleted #{@klass.name} class"
+  end
+
+  def instance_methods
+    @sections = @klass.sections.where(category: "instance_method")
+  end
+
+  def class_methods
+    @sections = @klass.sections.where(category: "class_method")
   end
 
   private

@@ -1,0 +1,29 @@
+<%= render 'components/containers/5xl' do %>
+  <header id="header" class="relative z-20">
+    <div>
+      <p class="mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400">Class info</p>
+      <div class="flex items-center">
+        <h1 class="inline-block text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-200"><%= title @klass.name %></h1>
+      </div>
+    </div>
+    <p class="mt-2 text-lg text-slate-700 dark:text-slate-400"><%= @klass.summary %></p>
+  </header>
+  <div class="mt-8">
+    <h3 class="text-xl font-medium tracking-tight dark:text-slate-200">Instance methods</h3>
+    <p class="text-slate-700 mt-2">These are methods that can be called on an object (instance of an class)</p>
+    <%= turbo_frame_tag dom_id(@klass, :instance_methods), target: "_top", class: "mt-6 grid gap-4 md:grid-cols-2" do %>
+      <% if @sections.present? %>
+        <%= render(partial: 'sections/section', collection: @sections, cached: true) %>
+      <% else %>
+        <div class="md:col-span-2">
+          <%= render 'components/empty_state/container' do %>
+            <div class="flex items-center justify-center">
+              <%= heroicon 'information-circle', options: { class: "h-5 w-5 mr-2" } %>
+              <p>There are no instance methods for <%= @klass.name %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
