@@ -7,8 +7,9 @@ class KlassesController < ApplicationController
     @version = Version.find_by_number(params[:version_number])
     @klass = Klass.find_by(name: klass_name, version: @version)
     authorize @klass
+    breadcrumb "v#{@version.number}", version_path(@version)
     breadcrumb @klass.name, "#"
-    breadcrumb "Overview", klass_path(@klass)
+    breadcrumb "Overview", request.path
   end
 
   def show
