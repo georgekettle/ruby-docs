@@ -11,8 +11,9 @@ class SectionsController < ApplicationController
     @klass = Klass.find_by(name: klass_name, version: @version)
     @section = Section.find_by(name: section_name, category: section_category, klass: @klass) || not_found
     authorize @section
-    breadcrumb @klass.name, "#"
-    breadcrumb @section.name, klass_path(@klass)
+    breadcrumb "v#{@version.number}", version_path(@version)
+    breadcrumb @klass.name, klass_path(@klass)
+    breadcrumb @section.name, request.path
   end
 
   def show

@@ -51,7 +51,7 @@
   <div class="mt-8">
     <h2 class="mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400">Included methods</h2>
     <h3 class="text-xl font-medium tracking-tight text-slate-900 dark:text-slate-200">Class methods</h3>
-    <p class="text-slate-700 mt-2">These are methods that can be called on the class directly like <code><%= @klass.name %>.new</code></p>
+    <p class="text-slate-700 dark:text-slate-400 mt-2">These are methods that can be called on the class directly like <code><%= @klass.name %>.new</code></p>
     <%= turbo_frame_tag dom_id(@klass, :class_methods), src: class_methods_klass_path(@klass), target: "_top", class: "mt-6 grid gap-4 md:grid-cols-2" do %>
       <% 2.times do %>
         <%= render 'components/loading_state/card' %>
@@ -60,7 +60,7 @@
   </div>
   <div class="mt-8">
     <h3 class="text-xl font-medium tracking-tight text-slate-900 dark:text-slate-200">Instance methods</h3>
-    <p class="text-slate-700 mt-2">These are methods that can be called on an object (instance of an class)</p>
+    <p class="text-slate-700 dark:text-slate-400 mt-2">These are methods that can be called on an object (instance of an class)</p>
     <%= turbo_frame_tag dom_id(@klass, :instance_methods), src: instance_methods_klass_path(@klass), target: "_top", class: "mt-6 grid gap-4 md:grid-cols-2" do %>
       <% 2.times do %>
         <%= render 'components/loading_state/card' %>

@@ -6,6 +6,7 @@ class VersionsController < ApplicationController
   def show_redirect
     @version = Version.find_by_number(params[:version_number])
     authorize @version
+    breadcrumb "v#{@version.number}", request.path
   end
 
   def show
