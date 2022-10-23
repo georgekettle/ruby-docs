@@ -1,0 +1,25 @@
+<%= render 'components/containers/7xl' do %>
+  <div class="md:flex items-center">
+    <div class="md:w-1/2 md:pr-4 pb-16">
+      <header id="header" class="relative z-20">
+        <div>
+          <p class="mb-3 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400">404 Error</p>
+          <div class="flex items-center">
+            <h1 class="text-3xl md:text-5xl tracking-tight font-semibold text-gray-900 dark:text-white">Page not found</h1>
+          </div>
+        </div>
+        <p class="mt-4 text-lg text-slate-700 dark:text-slate-400">The page you are looking for doesn't exist.<br>Here are some helpful links.</p>
+        <div class="grid lg:grid-cols-2 gap-4 w-full lg:w-96 mt-8">
+          <%= link_to :back, class: "bg-white hover:bg-slate-50 text-slate-900 font-medium h-12 px-6 rounded-lg w-full flex items-center justify-center border border-slate-200 hover:border-slate-300 dark:bg-slate-800 dark:border-slate-700 dark:hover:border-slate-600 dark:text-slate-400 dark:hover:text-slate-300 dark:hover:bg-slate-700" do %>
+            <%= heroicon 'arrow-left', options: {class: "h-5 w-5 mr-2"} %>
+            Back
+          <% end %>
+          <%= link_to "Take me home", root_path, class: "bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:ring-offset-primary-50 text-white font-medium h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto dark:bg-primary-600 dark:highlight-white/20 dark:hover:bg-primary-700" %>
+        </div>
+      </header>
+    </div>
+    <div class="md:w-1/2">
+      <div class="bg-slate-200 w-full aspect-[1/1] rounded-lg bg-cover bg-center shadow" style="background-image: url('https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80')"></div>
+    </div>
+  </div>
+<% end %>
