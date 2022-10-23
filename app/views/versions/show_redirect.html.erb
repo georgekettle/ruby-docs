@@ -31,25 +31,31 @@
 <% end %>
 
 <div class="p-4">
-  <% if current_user&.admin? %>
+  <% if policy(Klass).create? || policy(@version).update? || policy(@version).destroy? %>
     <div class="border border-slate-200 bg-slate-50 p-4 rounded-lg mb-8 flex items-center justify-between">
       <div class="flex items-center text-slate-500">
         <%= heroicon "lock-closed", variant: :mini, options: { class: "mr-2" } %>
-        <h4 class="text-sm font-medium">Only admins can view this</h4>
+        <h4 class="text-sm font-medium">Only admins can view these options</h4>
       </div>
       <div class="flex items-center text-gray-500 space-x-2 text-sm font-medium">
         <% link_classes = "px-3 py-1.5 text bg-transparent hover:bg-black hover:bg-opacity-5 rounded-md flex items-center" %>
-        <%= link_to new_version_klass_path(Current.version), class: link_classes do %>
-          <%= heroicon "plus-small", options: { class: "mr-1" } %>
-          Add class
+        <% if policy(Klass).create? %>
+          <%= link_to new_version_klass_path(Current.version), class: link_classes do %>
+            <%= heroicon "plus-small", options: { class: "mr-1" } %>
+            Add class
+          <% end %>
         <% end %>
-        <%= link_to edit_version_path(Current.version), class: link_classes do %>
-          <%= heroicon "pencil", variant: :mini, options: { class: "mr-1" } %>
-          Edit
+        <% if policy(@version).update? %>
+          <%= link_to edit_version_path(Current.version), class: link_classes do %>
+            <%= heroicon "pencil", variant: :mini, options: { class: "mr-1" } %>
+            Edit
+          <% end %>
         <% end %>
-        <%= link_to version_path(Current.version), data: { turbo_method: "delete", turbo_confrim: "Are you sure? You can't undo this action." }, class: link_classes do %>
-          <%= heroicon "trash", variant: :mini, options: { class: "mr-1" } %>
-          Delete
+        <% if policy(@version).destroy? %>
+          <%= link_to version_path(Current.version), data: { turbo_method: "delete", turbo_confrim: "Are you sure? You can't undo this action." }, class: link_classes do %>
+            <%= heroicon "trash", variant: :mini, options: { class: "mr-1" } %>
+            Delete
+          <% end %>
         <% end %>
       </div>
     </div>
