@@ -25,5 +25,8 @@ module BeginnerRuby
 
     # Sidekiq for background jobs
     config.active_job.queue_adapter = :sidekiq
+
+    # custom routes for exceptions
+    config.exceptions_app = self.routes
   end
 end
