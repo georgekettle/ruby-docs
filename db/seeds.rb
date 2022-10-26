@@ -16,18 +16,23 @@ version_numbers = ['3.1.2']
 main_menu = %w(String Integer Array Hash Symbol)
 scraped_versions = version_numbers.map { |v| RubyDocsScraper.new(v).call }
 
+base_url = "https://ruby-doc.org"
+
 scraped_versions.each do |version_hash|
 	# create Version
-	version = Version.create!(number: version_hash[:number])
-	version_hash[:classes].each do |class_hash|
-		is_main_menu = main_menu.include?(class_hash[:name])
+	version = Version.create!(number: version_hash[:number], scrape_url: version_hash[:url])
+	classes_and_modules = version_hash[:classes] + version_hash[:modules]
+	classes_and_modules.each do |class_or_module|
+		is_main_menu = main_menu.include?(class_or_module[:name])
 		# create Klass
 		klass = Klass.create!(
 			version: version,
-			name: class_hash[:name],
-			summary: class_hash[:summary],
-			main_menu: is_main_menu)
-		class_hash[:methods].each do |method|
+			name: class_or_module[:name],
+			summary: class_or_module[:summary],
+			main_menu: is_main_menu,
+			category: class_or_module[:type])
+		# create sections (methods) for klass
+		class_or_module[:methods].each do |method|
 			Section.create!(
 				name: method[:name],
 				category: method[:category],
