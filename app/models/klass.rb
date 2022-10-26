@@ -10,4 +10,7 @@ class Klass < ApplicationRecord
   has_rich_text :content
 
   validates :name, presence: true
+  validates :category, presence: true
+
+  enum category: { class: 0, module: 1 }
 end
