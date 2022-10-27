@@ -25,4 +25,9 @@ class Section < ApplicationRecord
   def category_header
     category.gsub("_", " ").capitalize
   end
+
+  def self.format_method_name(name)
+    formatted_dashes = name.gsub('-', '2D')
+    CGI.escape(formatted_dashes).split("%").reject(&:empty?).join('-')
+  end
 end

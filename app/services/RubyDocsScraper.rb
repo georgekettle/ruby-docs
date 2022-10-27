@@ -89,16 +89,16 @@ class RubyDocsScraper
   end
 
   def method_summary(name)
-    summ = @class_nok_doc.search("[id='#{method_id(name)}'] p").first&.text
+    summ = @class_nok_doc.search("[id='#{Section.format_method_name(name)}-method'] p").first&.text
     if summ.present?
       summ
     else
-      @class_nok_doc.search("[id='#{method_id(name)}'] .aliases").first&.text&.strip
+      @class_nok_doc.search("[id='#{Section.format_method_name(name)}-method'] .aliases").first&.text&.strip
     end
   end
 
   def content(name)
-    html = @class_nok_doc.search("[id='#{method_id(name)}'] > div").last
+    html = @class_nok_doc.search("[id='#{Section.format_method_name(name)}-method'] > div").last
     html.search('p').each{|el| el.name = 'div'} # substitute p tags for div tags (ActionText preference)
     # html.xpath('//@*').remove # remove all attributes
     html.traverse do |node| 
@@ -107,11 +107,5 @@ class RubyDocsScraper
       end
     end
     html.inner_html.strip
-  end
-
-  def method_id(name)
-    formatted_dashes = name.gsub('-', '2D')
-    formatted_method_name = CGI.escape(formatted_dashes).split("%").reject(&:empty?).join('-')
-    "#{formatted_method_name}-method"
   end
 end

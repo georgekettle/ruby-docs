@@ -41,4 +41,14 @@ scraped_versions.each do |version_hash|
 				rubydocs_says: method[:content])
 		end
 	end
+	
+	# Add parents to each klass
+	classes_and_modules.each do |class_or_module|
+		klass = Klass.find_by(name: class_or_module[:name], version: version)
+		parent_name = class_or_module[:parent]
+		parent_klass = Klass.find_by(name: parent_name, version: version)
+		if klass && parent_klass
+			klass.update(parent: parent_klass)
+		end
+	end
 end
