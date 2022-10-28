@@ -51,4 +51,17 @@ scraped_versions.each do |version_hash|
 			klass.update(parent: parent_klass)
 		end
 	end
+
+	# Update links to link to internal content
+	version.sections.each do |section|
+		UpdateContentLinksJob.perform_now(section: section)
+	end
 end
+
+# Reindex algolia just to be sure
+# - clear index
+Section.clear_index!
+Klass.clear_index!
+# - reindex
+Section.reindex!
+Klass.reindex!

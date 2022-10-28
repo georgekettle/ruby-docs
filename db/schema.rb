@@ -60,7 +60,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_26_000020) do
     t.string "summary"
     t.bigint "parent_id"
     t.boolean "main_menu", default: false
-    t.string "icon"
     t.integer "category", default: 0
     t.index ["parent_id"], name: "index_klasses_on_parent_id"
     t.index ["version_id"], name: "index_klasses_on_version_id"

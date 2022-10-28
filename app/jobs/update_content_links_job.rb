@@ -23,10 +23,10 @@ class UpdateContentLinksJob < ApplicationJob
       p original_href
       match = original_href.match(regex)
       if match
-        link.attributes['href'].value = (if match[:method_type] && match[:method_name] && !match[:class_name_1]
-                                          build_link_method_without_klass(section, match)
-                                        elsif match[:method_type] && match[:method_name] && match[:class_name_1]
+        link.attributes['href'].value = (if match[:method_type] && match[:method_name] && match[:class_name_1]
                                           build_link_method_with_klass(section, match)
+                                        elsif match[:method_type] && match[:method_name] && match[:class_name_1].nil?
+                                          build_link_method_without_klass(section, match)
                                         elsif match[:class_name_1]
                                           build_link_only_klass(section, original_href)
                                         end) || original_href
