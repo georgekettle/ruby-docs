@@ -12,7 +12,7 @@ class UpdateContentLinksJob < ApplicationJob
     # change href value
     update_hrefs(section, links)
     # convert back to string
-    section.update_column(rubydocs_says: html.to_s) # => notice the use of 'update_column' to avoid callbacks (specifically for updating content)
+    section.update_column(:rubydocs_says, html.to_s) # => notice the use of 'update_column' to avoid callbacks (specifically for updating content)
   end
 
   def update_hrefs(section, links)
