@@ -1,8 +1,8 @@
 class RubyDocsScraper
   def initialize(version)
     @version = version
-    @base_url = "https://ruby-doc.org/core-#{@version}"
-    html_file = URI.open(@base_url).read
+    @version_url = "https://ruby-doc.org/core-#{@version}"
+    html_file = URI.open(@version_url).read
     @nok_doc = Nokogiri::HTML(html_file)
   end
 
@@ -10,16 +10,19 @@ class RubyDocsScraper
     # return hash of results from url
     {
       number: @version,
-      base_url: @base_url,
-      classes: classes
+      url: @version_url,
+      classes: classes,
+      modules: modules
     }
   end
 
   def classes
+    puts "Scraping Classes"
     class_names = @nok_doc.search('#class-index .entries .class a').map{ |c| c&.text&.strip }
     class_names.map do |c_name|
+      puts "- #{c_name}"
       c_name_for_url = c_name.gsub("::", "/")
-      url = @base_url + "/#{c_name_for_url}.html"
+      url = @version_url + "/#{c_name_for_url}.html"
       html_file = URI.open(url).read
       @class_nok_doc = Nokogiri::HTML(html_file)
       {
@@ -27,7 +30,28 @@ class RubyDocsScraper
         summary: class_summary,
         parent: parent,
         methods: methods,
-        url: url
+        url: url,
+        type: "class"
+      }
+    end
+  end
+
+  def modules
+    puts "Scraping Modules"
+    module_names = @nok_doc.search('#class-index .entries .module a').map{ |m| m&.text&.strip }
+    module_names.map do |m_name|
+      puts "- #{m_name}"
+      m_name_for_url = m_name.gsub("::", "/")
+      url = @version_url + "/#{m_name_for_url}.html"
+      html_file = URI.open(url).read
+      @class_nok_doc = Nokogiri::HTML(html_file)
+      {
+        name: m_name,
+        summary: class_summary,
+        parent: parent,
+        methods: methods,
+        url: url,
+        type: "module"
       }
     end
   end
@@ -48,6 +72,7 @@ class RubyDocsScraper
   end
 
   def build_method(name, anchor)
+    puts "-- #{name}"
     match_data = name.match(/(?<category>::|#)(?<name>.+)/)
     name = match_data[:name]
     category = (case match_data[:category]
@@ -64,16 +89,16 @@ class RubyDocsScraper
   end
 
   def method_summary(name)
-    summ = @class_nok_doc.search("[id='#{method_id(name)}'] p").first&.text
+    summ = @class_nok_doc.search("[id='#{Section.format_method_name(name)}-method'] p").first&.text
     if summ.present?
       summ
     else
-      @class_nok_doc.search("[id='#{method_id(name)}'] .aliases").first&.text&.strip
+      @class_nok_doc.search("[id='#{Section.format_method_name(name)}-method'] .aliases").first&.text&.strip
     end
   end
 
   def content(name)
-    html = @class_nok_doc.search("[id='#{method_id(name)}'] > div").last
+    html = @class_nok_doc.search("[id='#{Section.format_method_name(name)}-method'] > div").last
     html.search('p').each{|el| el.name = 'div'} # substitute p tags for div tags (ActionText preference)
     # html.xpath('//@*').remove # remove all attributes
     html.traverse do |node| 
@@ -82,11 +107,5 @@ class RubyDocsScraper
       end
     end
     html.inner_html.strip
-  end
-
-  def method_id(name)
-    formatted_dashes = name.gsub('-', '2D')
-    formatted_method_name = CGI.escape(formatted_dashes).split("%").reject(&:empty?).join('-')
-    "#{formatted_method_name}-method"
   end
 end
