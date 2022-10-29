@@ -4,6 +4,9 @@ task :reseed_db => :environment do
   Section.destroy_all
   Klass.destroy_all
   Version.destroy_all
+
+  # remove all redis background jobs
+  $redis.flushall
   
   # List of ruby versions to scrape
   version_numbers = ['2.6.10', '2.7.6', '3.0.4', '3.1.2']
@@ -42,7 +45,7 @@ task :reseed_db => :environment do
       parent_name = class_or_module[:parent]
       parent_klass = Klass.find_by(name: parent_name, version: version)
       if klass && parent_klass
-        klass.update_column(parent_id: parent_klass.id) #=> 'update_column' method to avoid callbacks in order to reindex all records to algolia later
+        klass.update_column(:parent_id, parent_klass.id) #=> 'update_column' method to avoid callbacks in order to reindex all records to algolia later
       end
     end
   
