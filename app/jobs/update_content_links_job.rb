@@ -48,7 +48,9 @@ class UpdateContentLinksJob < ApplicationJob
     klass_names = [match[:class_name_1], match[:class_name_2], match[:class_name_3]].compact
     klass_name = klass_names.join('::')
     klass = Klass.find_by(name: klass_name, version: section.version)
-    klass_path(klass) if klass
+    method_name = match[:method_name] == "3D-3D" ? "==" : match[:method_name]
+    link_section = Section.find_by(name: method_name, category: convert_method_type(match[:method_type]), klass: klass)
+    section_path(link_section) if link_section
   end
 
   def build_link_only_klass(section, original_href)
