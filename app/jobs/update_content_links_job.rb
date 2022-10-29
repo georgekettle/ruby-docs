@@ -12,15 +12,15 @@ class UpdateContentLinksJob < ApplicationJob
     # change href value
     update_hrefs(section, links)
     # convert back to string
-    section.update(rubydocs_says: html.to_s)
+    section.update_column(rubydocs_says: html.to_s) # => notice the use of 'update_column' to avoid callbacks (specifically for updating content)
   end
 
   def update_hrefs(section, links)
     regex = /^(?<class_name_1>[A-Z]\w+)*\/*(?<class_name_2>[A-Z]\w+)*\/*(?<class_name_3>[A-Z]\w+)*(\.html)*#*(method-)*(?<method_type>i|c)*(-)*(?<method_name>.+)*$/
     links.each do |link|
+      puts "-------------------"
       original_href = link.attributes['href'].value
       original_href.gsub!('../', '')
-      p original_href
       match = original_href.match(regex)
       if match
         link.attributes['href'].value = (if match[:method_type] && match[:method_name] && match[:class_name_1]
@@ -31,6 +31,9 @@ class UpdateContentLinksJob < ApplicationJob
                                           build_link_only_klass(section, original_href)
                                         end) || original_href
       end
+      p "#{original_href} --> #{link.attributes['href'].value}"
+      p match
+      puts "-------------------"
     end
   end
 
@@ -42,11 +45,8 @@ class UpdateContentLinksJob < ApplicationJob
   end
 
   def build_link_method_with_klass(section, match)
-    p match
-    p [match[:class_name_1], match[:class_name_2], match[:class_name_3]]
     klass_names = [match[:class_name_1], match[:class_name_2], match[:class_name_3]].compact
     klass_name = klass_names.join('::')
-    p klass_name
     klass = Klass.find_by(name: klass_name, version: section.version)
     klass_path(klass) if klass
   end
