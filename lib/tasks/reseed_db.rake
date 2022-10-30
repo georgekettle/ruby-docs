@@ -68,7 +68,7 @@ task :reseed_db => :environment do
     end
   
     # Update links to link to internal content
-    version.sections.each do |section|
+    version.sections.find_each(batch_size: 100) do |section|
       puts "- Updating links for section: #{section.name}"
       UpdateContentLinksJob.perform_now(section: section)
     end
