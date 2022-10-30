@@ -83,6 +83,7 @@ class RubyDocsScraper
       name: name,
       category: category,
       summary: method_summary(name),
+      source_code: source_code(name),
       content: content(name),
       url: anchor
     }
@@ -100,12 +101,23 @@ class RubyDocsScraper
   def content(name)
     html = @class_nok_doc.search("[id='#{Section.format_method_name(name)}-method'] > div").last
     html.search('p').each{|el| el.name = 'div'} # substitute p tags for div tags (ActionText preference)
-    # html.xpath('//@*').remove # remove all attributes
+    # remove source code section
+    source = @class_nok_doc.search("[id='#{Section.format_method_name(name)}-method'] .method-source-code").first
+    source.remove if source
+    # remove attributes except href
     html.traverse do |node| 
       node.keys.each do |attribute|
         node.delete attribute unless attribute == 'href'
       end
     end
     html.inner_html.strip
+  end
+
+  def source_code(name)
+    html = @class_nok_doc.search("[id='#{Section.format_method_name(name)}-method'] .method-source-code pre").first
+    if html
+      html.set_attribute('data-controller', 'code')
+    end
+    html&.to_s&.strip
   end
 end
