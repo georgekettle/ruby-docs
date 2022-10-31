@@ -114,6 +114,9 @@ group :development do
 
   # Highlights N+1 queries to be dealt with
   gem 'bullet'
+
+  # get the memory usage of a process
+  gem 'get_process_mem'
 end
 
 group :test do
