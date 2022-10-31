@@ -93,6 +93,9 @@ gem "skylight"
 # Caching with Memcache
 gem 'dalli'
 
+# get the memory usage of a process
+gem 'get_process_mem'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -114,9 +117,6 @@ group :development do
 
   # Highlights N+1 queries to be dealt with
   gem 'bullet'
-
-  # get the memory usage of a process
-  gem 'get_process_mem'
 end
 
 group :test do
