@@ -17,7 +17,7 @@ task :reseed_db => [:environment] do
 
   if File.exist?(scraped_data_filepath)
     puts "Getting data from saved scrape data"
-    scraped_versions = YAML.load_file(scraped_data_filepath).freeze
+    scraped_versions = JSON.parse(scraped_data_filepath).freeze
   else
     puts "You'll first need to scrape data --> first run rake :scrape_docs"
     next # exits rake task
@@ -48,7 +48,6 @@ task :reseed_db => [:environment] do
         version_hash = scraped_versions.detect{ |v_hash| v_hash[:number] == version.number }
         class_and_modules = version_hash[:classes] + version_hash[:modules]
         class_and_modules.lazy.each do |class_or_module|
-          # print_usage("class_or_module: #{class_or_module[:name]}")
           Klass.create!(version: version,
                         name: class_or_module[:name],
                         summary: class_or_module[:summary],
@@ -62,22 +61,29 @@ task :reseed_db => [:environment] do
 
     print_usage("before creating methods")
     Klass.uncached do
-      Klass.joins(:version).pluck(:id, :name, :version_id, :'versions.number').lazy.each do |klass|
-        version_hash = scraped_versions.lazy.detect{ |v_hash| v_hash[:number] == klass[3] }
+      Klass.includes(:version).find_each(batch_size: 20) do |klass|
+        version_hash = scraped_versions.lazy.detect{ |v_hash| v_hash[:number] == klass.version.number }
         class_and_modules = version_hash[:classes] + version_hash[:modules]
-        klass_hash = class_and_modules.lazy.detect{ |k_hash| k_hash[:name] == klass[1] }
+        klass_hash = class_and_modules.lazy.detect{ |k_hash| k_hash[:name] == klass.name }
         if klass_hash
           klass_hash[:methods].lazy.each do |method_hash|
             Section.create!(name: method_hash[:name],
                             category: method_hash[:category],
-                            klass_id: klass[0],
+                            klass_id: klass.id,
                             summary: method_hash[:summary],
                             rubydocs_says: method_hash[:content],
                             source_code: method_hash[:source_code])
             GC.start
           end
         end
-        print_usage("klass methods: #{klass[1]}")
+
+        # update klass parent
+        if klass_hash[:parent]
+          parent = Klass.find_by(name: klass_hash[:parent], version: klass.version)
+          klass.update_column(:parent_id, parent.id)
+        end
+
+        print_usage("klass methods: #{klass.name}")
         GC.start
       end
     end
