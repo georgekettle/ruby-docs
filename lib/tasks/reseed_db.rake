@@ -17,7 +17,7 @@ task :reseed_db => [:environment] do
 
   if File.exist?(scraped_data_filepath)
     puts "Getting data from saved scrape data"
-    scraped_versions = JSON.parse(scraped_data_filepath).freeze
+    scraped_versions = YAML.load_file(scraped_data_filepath).freeze
   else
     puts "You'll first need to scrape data --> first run rake :scrape_docs"
     next # exits rake task
