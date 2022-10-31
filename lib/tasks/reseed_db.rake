@@ -63,9 +63,14 @@ task :reseed_db => [:environment] do
           klass.update_column(:parent_id, parent_klass.id) #=> 'update_column' method to avoid callbacks in order to reindex all records to algolia later
         end
       end
+    end
+
+    GC.start
     
-      # Update links to link to internal content
-      version.sections.find_each(batch_size: 50) do |section|
+    # Update links to link to internal content
+    Version.all.find_each(batch_size: 1) do |version|
+      puts "- Updating section links for version: #{version.number}"
+      version.sections.find_each(batch_size: 10) do |section|
         puts "- Updating links for section: #{section.name}"
         UpdateContentLinksJob.perform_now(section: section)
       end
