@@ -35,3 +35,5 @@
 
 # Ignore env variable files
 *.env
+
+/node_modules
