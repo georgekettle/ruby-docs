@@ -2,6 +2,61 @@
 # yarn lockfile v1
 
 
+"@algolia/client-abtesting@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@algolia/client-abtesting/-/client-abtesting-5.0.0-alpha.27.tgz#2dd786ac2d188f91f56e323db0dcd23a1da270d6"
+  integrity sha512-k4zjvQdhV6Ed/ZTPtDNCpaYRlchFJwxgO54y69WcB3SajDGBQAjjX8ZE/+JKu7DBUJ0YQW11yzD0yJk4OAX96Q==
+  dependencies:
+    "@algolia/client-common" "5.0.0-alpha.27"
+    "@algolia/requester-browser-xhr" "5.0.0-alpha.27"
+    "@algolia/requester-node-http" "5.0.0-alpha.27"
+
+"@algolia/client-analytics@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@algolia/client-analytics/-/client-analytics-5.0.0-alpha.27.tgz#72c34b3cea5f5768b7df8a366f0a3fc05a83610b"
+  integrity sha512-YtV3ngcYvyFwu8DmNjaLzJI2CouCgWUiS/8DJFJsfZkx0hyiqOkZoxOYY8rw/G1k2MIvZRNR3/FOkuGxV04CvA==
+  dependencies:
+    "@algolia/client-common" "5.0.0-alpha.27"
+    "@algolia/requester-browser-xhr" "5.0.0-alpha.27"
+    "@algolia/requester-node-http" "5.0.0-alpha.27"
+
+"@algolia/client-common@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@algolia/client-common/-/client-common-5.0.0-alpha.27.tgz#fa2ca5e2562207985974b0dd27c0a45c224795ac"
+  integrity sha512-lvHYRSeOqXaLIquQaLkQktn9i+iIWvNg6QTzPAQV+jT3DV3LWpaxBSfo5j5JX0HG5bgkeN67SLvYDmlk6UKLJA==
+
+"@algolia/client-personalization@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@algolia/client-personalization/-/client-personalization-5.0.0-alpha.27.tgz#845e5f69c6f53ee2e08d6bbaa9926e091a0a4297"
+  integrity sha512-p6niRD5EHop3CLuvi+MGkjCZx35FnOb0DESXvljUQ3DmCfrygGUPpjnwz4iSYtm7nLqVv62QJXcWx54C0ZWECQ==
+  dependencies:
+    "@algolia/client-common" "5.0.0-alpha.27"
+    "@algolia/requester-browser-xhr" "5.0.0-alpha.27"
+    "@algolia/requester-node-http" "5.0.0-alpha.27"
+
+"@algolia/client-search@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@algolia/client-search/-/client-search-5.0.0-alpha.27.tgz#e164568c1849f317309c8562474b502e419dc1b0"
+  integrity sha512-pLYk4276EMHLQOyEXRBIRJltXPkWbx3g2PvOFsQb+Si19M7ZN/U3xXmWDUxm4jTVv1bLzQNf2+zElKck6HZCOw==
+  dependencies:
+    "@algolia/client-common" "5.0.0-alpha.27"
+    "@algolia/requester-browser-xhr" "5.0.0-alpha.27"
+    "@algolia/requester-node-http" "5.0.0-alpha.27"
+
+"@algolia/requester-browser-xhr@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@algolia/requester-browser-xhr/-/requester-browser-xhr-5.0.0-alpha.27.tgz#8db7c8831eca8645f201ddd035a97f16d658049a"
+  integrity sha512-juIHEHKmUlJlywgWMejVS7RvYW2IWzrx2VlOLS0Bg+vpRJ55ZH18h48qYKchydDwgwh4PN8W3xQ0ONBl1/1Biw==
+  dependencies:
+    "@algolia/client-common" "5.0.0-alpha.27"
+
+"@algolia/requester-node-http@5.0.0-alpha.27":
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@algolia/requester-node-http/-/requester-node-http-5.0.0-alpha.27.tgz#2b53f0493b40d4ff5726b60c324d56d3385806be"
+  integrity sha512-x8ETgUEmo5nWggZ5n5MsdHqgHPodhUYazg7kEP6S6pmpQvFYGVkOVMLNmsk5IZPUOSHfcY6wH+rKdM2ow04Lxw==
+  dependencies:
+    "@algolia/client-common" "5.0.0-alpha.27"
+
 "@esbuild/android-arm@0.15.13":
   version "0.15.13"
   resolved "https://registry.yarnpkg.com/@esbuild/android-arm/-/android-arm-0.15.13.tgz#ce11237a13ee76d5eae3908e47ba4ddd380af86a"
@@ -48,6 +103,19 @@
   integrity sha512-K2fV9C0z88fapu58nt9uHzMylsmJWUFuaIFvuZQEf1WTiPMsgTsj1bf8+cD81zXfTXYMZDQNRq4164JmuBKD3A==
   dependencies:
     spark-md5 "^3.0.1"
+
+algoliasearch@^5.0.0-alpha.27:
+  version "5.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/algoliasearch/-/algoliasearch-5.0.0-alpha.27.tgz#e7bccc1108ed0fddd2b559c8141e194d1f0c7a02"
+  integrity sha512-21GaVH9FuGn3zNor4xV2XB7BW//kqJsW9FJ4c7wq5edL2jmZQl9mbH9lv17g3QqljGXGAef4K/O72G72x1+bTQ==
+  dependencies:
+    "@algolia/client-abtesting" "5.0.0-alpha.27"
+    "@algolia/client-analytics" "5.0.0-alpha.27"
+    "@algolia/client-common" "5.0.0-alpha.27"
+    "@algolia/client-personalization" "5.0.0-alpha.27"
+    "@algolia/client-search" "5.0.0-alpha.27"
+    "@algolia/requester-browser-xhr" "5.0.0-alpha.27"
+    "@algolia/requester-node-http" "5.0.0-alpha.27"
 
 esbuild-android-64@0.15.13:
   version "0.15.13"

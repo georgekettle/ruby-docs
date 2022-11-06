@@ -5,6 +5,7 @@
     "@hotwired/stimulus": "^3.1.1",
     "@hotwired/turbo-rails": "^7.2.4",
     "@rails/actiontext": "^7.0.4",
+    "algoliasearch": "^5.0.0-alpha.27",
     "esbuild": "^0.15.13",
     "highlight.js": "^11.6.0",
     "stimulus-character-counter": "^4.1.0",
