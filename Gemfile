@@ -61,9 +61,6 @@ gem "loaf"
 gem "algolia"
 gem "algoliasearch-rails"
 
-# icons
-gem "font-awesome-sass", "~> 6.2.0"
-
 # Form generator
 gem 'simple_form'
 
