@@ -1,9 +1,8 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
-const plugin = require('tailwindcss/plugin')
+// const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   content: [
-    './public/*.html',
     './app/views/**/*.html.erb',
     './app/helpers/**/*.rb',
     './app/assets/stylesheets/**/*.css',
@@ -14,8 +13,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#ff4124',
+        'primary': {
           '50': '#fff2f0',
           '100': '#ffddd7',
           '200': '#fdb9af',
@@ -27,7 +25,7 @@ module.exports = {
           '800': '#bc2710',
           '900': '#a72511',
         },
-        contrast: {
+        'contrast': {
           '50': '#f3f9ec',
           '100': '#e4f2d5',
           '200': '#cae7af',
@@ -39,8 +37,7 @@ module.exports = {
           '800': '#355222',
           '900': '#2f4621',
         },
-        yellow: {
-          DEFAULT: '#fd7521',
+        'yellow': {
           '50': '#fff8eb',
           '100': '#ffefd1',
           '200': '#ffdb9e',
@@ -67,10 +64,10 @@ module.exports = {
       sans: [...defaultTheme.fontFamily.sans],
     }
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/line-clamp'),
-  ]
+  // plugins: [
+  //   require('tailwindcss/forms'),
+  //   require('tailwindcss/aspect-ratio'),
+  //   require('tailwindcss/typography'),
+  //   require('tailwindcss/line-clamp'),
+  // ]
 }

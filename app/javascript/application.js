@@ -1,8 +1,7 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
-
-// Custom stimulus controllers
 import "./controllers"
+
 // Imported stimulus controllers
 import Dropdown from 'stimulus-dropdown'
 application.register('dropdown', Dropdown)
