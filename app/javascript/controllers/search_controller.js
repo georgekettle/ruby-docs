@@ -3,7 +3,7 @@ import { algoliasearch } from 'algoliasearch'
 
 // Connects to data-controller="search"
 export default class extends Controller {
-  static targets = ["input", "results", "hitTemplate", "error"]
+  static targets = ["input", "results", "hitTemplate"]
   static values = {
     rubyVersion: String,
     algoliaId: String,
@@ -43,12 +43,14 @@ export default class extends Controller {
     // Fetch search results
     const { results } = await this.client.search({
       requests: [
+        // request for klasses
         {
           indexName: this.indexNameValue,
           query: query,
           hitsPerPage: 5,
           filters: `version_number:${this.rubyVersionValue} AND class:Klass`
         },
+        // request for sections
         {
           indexName: this.indexNameValue,
           query: query,
@@ -58,43 +60,61 @@ export default class extends Controller {
       ],
     })
     this._removeLoading()
+    this._displayResults(results)
+  }
 
-    this._displayKlassResults(results[0])
-    this._displaySectionResults(results[1])
+  _displayResults(results) {
+    if (results[0].hits.length > 0) {
+      this._displayKlassResults(results[0])
+    }
+
+    if (results[1].hits.length > 0) {
+      this._displaySectionResults(results[1])
+    }
+    
+    if ((results[1].hits.length === 0) && (results[0].hits.length === 0)) {
+      this._displayNoResults()
+    }
   }
 
   _displayKlassResults(results) {
-    console.log(results)
     const hits = results.hits
-    if (hits) {
+    let html
+    if (hits.length > 0) {
       const htmlHits = hits.map(hit => {
         return this._renderKlassHTML(hit)
       })
-      const htmlKlassResults = `<div class="mb-4">
-                                    <p class="pb-4 text-md font-semibold dark:text-slate-200">Classes</p>
-                                    <ul data-search-target="results">
-                                      ${htmlHits.join('')}
-                                    </ul>
-                                  </div>`
-      this.resultsTarget.insertAdjacentHTML('afterbegin', htmlKlassResults)
+      html = htmlHits.join('')
+    } else {
+      html = this._renderEmptyState('classes')
     }
+    const htmlKlassResults = `<div class="mb-4">
+                                  <p class="pb-4 text-md font-semibold dark:text-slate-200">Classes</p>
+                                  <ul data-search-target="results">
+                                    ${html}
+                                  </ul>
+                                </div>`
+    this.resultsTarget.insertAdjacentHTML('afterbegin', htmlKlassResults)
   }
 
   _displaySectionResults(results) {
-    console.log(results)
     const hits = results.hits
-    if (hits) {
+    let html
+    if (hits.length > 0) {
       const htmlHits = hits.map(hit => {
         return this._renderSectionHTML(hit)
       })
-      const htmlSectionResults = `<div class="mb-4">
-                                    <p class="pb-4 text-md font-semibold dark:text-slate-200">Methods</p>
-                                    <ul data-search-target="results">
-                                      ${htmlHits.join('')}
-                                    </ul>
-                                  </div>`
-      this.resultsTarget.insertAdjacentHTML('beforeend', htmlSectionResults)
+      html = htmlHits.join('')
+    } else {
+      html = this._renderEmptyState('methods')
     }
+    const htmlSectionResults = `<div class="mb-4">
+                                  <p class="pb-4 text-md font-semibold dark:text-slate-200">Methods</p>
+                                  <ul data-search-target="results">
+                                    ${html}
+                                  </ul>
+                                </div>`
+    this.resultsTarget.insertAdjacentHTML('beforeend', htmlSectionResults)
   }
 
   _sectionTitle = (section) => {
@@ -143,7 +163,29 @@ export default class extends Controller {
     this.resultsTarget.innerHTML = this.loadingHtmlValue
   }
 
+  _displayNoResults() {
+    this.resultsTarget.innerHTML = `<div class="p-8">
+                                      <p class="font-normal text-sm text-slate-400 text-center mb-4">We looked both ways, but couldn't find any results for your search</p>
+                                      <div class="w-full pointer-events-none overflow-hidden rounded-xl shadow">
+                                        <div style="width:100%;height:0;padding-bottom:56%;position:relative;">
+                                          <iframe src="https://giphy.com/embed/28cUPIfjtmKVYO8flA" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                                        </div>
+                                      </div>
+                                    </div>`
+  }
+
   _removeLoading() {
     this.resultsTarget.innerHTML = ''
+  }
+
+  _renderEmptyState = (itemsName) => {
+    return(`<div class="p-6 md:p-8 text-slate-400 border border-slate-100 rounded-lg shadow-sm dark:bg-slate-800 dark:highlight-white/5 dark:border-slate-800">
+              <div class="flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5 h-5 w-5 mr-2">
+                  <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd"></path>
+                </svg>
+                <p class="font-normal">No ${itemsName} found for search</p>
+              </div>
+            </div>`)
   }
 }
