@@ -5,13 +5,13 @@ module Searchable::ForSection
   
   included do
     algoliasearch index_name: "docs_#{Rails.env}", id: :algolia_id, enqueue: :trigger_sidekiq_worker do
-      attribute :name, :category, :id, :created_at, :class
+      attribute :name, :category, :id, :created_at, :class, :summary
       add_attribute :version_number
       add_attribute :klass_name
 
       attributesForFaceting [:version_number, :klass_name, :class]
 
-      searchableAttributes ['name', 'unordered(version_number)', 'unordered(klass_name)']
+      searchableAttributes ['name', 'klass_name', 'summary', 'version_number']
     end
   end
 

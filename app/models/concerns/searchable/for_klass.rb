@@ -7,12 +7,12 @@ module Searchable::ForKlass
     after_save :trigger_update_associations
 
     algoliasearch index_name: "docs_#{Rails.env}", id: :algolia_id, enqueue: :trigger_sidekiq_worker do
-      attribute :name, :id, :created_at, :class, :category
+      attribute :name, :id, :created_at, :class, :category, :summary
       add_attribute :version_number
 
       attributesForFaceting [:version_number, :class]
 
-      searchableAttributes ['name', 'unordered(version_number)', 'unordered(category)']
+      searchableAttributes ['name', 'summary', 'category', 'version_number']
     end
   end
 
