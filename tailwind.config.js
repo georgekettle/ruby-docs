@@ -1,5 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
-// const plugin = require('tailwindcss/plugin')
+const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   content: [
@@ -64,10 +64,10 @@ module.exports = {
       sans: [...defaultTheme.fontFamily.sans],
     }
   },
-  // plugins: [
-  //   require('tailwindcss/forms'),
-  //   require('tailwindcss/aspect-ratio'),
-  //   require('tailwindcss/typography'),
-  //   require('tailwindcss/line-clamp'),
-  // ]
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/line-clamp'),
+  ]
 }
