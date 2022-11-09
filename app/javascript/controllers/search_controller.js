@@ -48,14 +48,20 @@ export default class extends Controller {
           indexName: this.indexNameValue,
           query: query,
           hitsPerPage: 5,
-          filters: `version_number:${this.rubyVersionValue} AND class:Klass`
+          filters: `version_number:${this.rubyVersionValue} AND class:Klass`,
+          attributesToHighlight: ['*'],
+          highlightPreTag: '<span class="text-yellow-500 group-hover:text-white">',
+          highlightPostTag: '</span>'
         },
         // request for sections
         {
           indexName: this.indexNameValue,
           query: query,
           hitsPerPage: 5,
-          filters: `version_number:${this.rubyVersionValue} AND class:Section`
+          filters: `version_number:${this.rubyVersionValue} AND class:Section`,
+          attributesToHighlight: ['*'],
+          highlightPreTag: '<span class="text-yellow-500 group-hover:text-white">',
+          highlightPostTag: '</span>'
         }
       ],
     })
@@ -64,6 +70,7 @@ export default class extends Controller {
   }
 
   _displayResults(results) {
+    console.log(results)
     if (results[0].hits.length > 0) {
       this._displayKlassResults(results[0])
     }
@@ -117,13 +124,15 @@ export default class extends Controller {
     this.resultsTarget.insertAdjacentHTML('beforeend', htmlSectionResults)
   }
 
-  _sectionTitle = (section) => {
+  _sectionTitle = (section, highlightResult) => {
     const separator = (section.category === 'instance_method') ? '#' : '::'
-    return `<span class="opacity-40 group-hover:opacity-50">${section.klass_name}</span> ${separator} ${section.name}`
+    return `<span class="opacity-40 group-hover:opacity-50">${highlightResult.klass_name.value}</span> ${separator} ${highlightResult.name.value}`
   }
 
   _renderSectionHTML = (section) => {
-    const title = this._sectionTitle(section)
+    const highlightResult = section._highlightResult
+    const title = this._sectionTitle(section, highlightResult)
+    const summary = this._formatSummary(section.summary, highlightResult.summary)
     return(`<li class="pb-2">
               <a href="/sections/${section.id}" class="group p-4 bg-slate-50 rounded-xl inline-block w-full hover:bg-primary-500 hover:text-white dark:bg-slate-700 dark:hover:bg-slate-900 dark:hover:text-slate-300">
                 <div class="flex items-center">
@@ -134,7 +143,7 @@ export default class extends Controller {
                   </div>
                   <div>
                     <p class="text-xs font-semibold py-1 px-2 rounded-full bg-slate-100 inline-block group-hover:text-white group-hover:bg-white/10 mb-1 dark:bg-black/10">${title}</p>
-                    <h5 class="font-normal text-sm group-hover:text-primary-300 text-slate-400 dark:group-hover:text-slate-400">Initialize an instance of Array class</h5>
+                    <h5 class="font-normal text-sm group-hover:text-primary-300 text-slate-400 dark:group-hover:text-slate-400 line-clamp-1">${summary}</h5>
                   </div>
                 </div>
               </a>
@@ -142,6 +151,8 @@ export default class extends Controller {
   }
 
   _renderKlassHTML = (klass) => {
+    const highlightResult = klass._highlightResult
+    const summary = this._formatSummary(klass.summary, highlightResult.summary)
     return(`<li class="pb-2">
               <a href="/klasses/${klass.id}" class="group p-4 bg-slate-50 rounded-xl inline-block w-full hover:bg-primary-500 hover:text-white dark:bg-slate-700 dark:hover:bg-slate-900 dark:hover:text-slate-300">
                 <div class="flex items-center">
@@ -152,7 +163,7 @@ export default class extends Controller {
                   </div>
                   <div>
                     <p class="text-xs font-semibold py-1 px-2 rounded-full bg-slate-100 inline-block group-hover:text-white group-hover:bg-white/10 mb-1 dark:bg-black/10">${klass.name}</p>
-                    <h5 class="font-normal text-sm group-hover:text-primary-300 text-slate-400 dark:group-hover:text-slate-400">Short explanation of class</h5>
+                    <h5 class="font-normal text-sm group-hover:text-primary-300 text-slate-400 dark:group-hover:text-slate-400 line-clamp-1">${summary}</h5>
                   </div>
                 </div>
               </a>
@@ -187,5 +198,15 @@ export default class extends Controller {
                 <p class="font-normal">No ${itemsName} found for search</p>
               </div>
             </div>`)
+  }
+
+  _formatSummary(summary, highlightSummary) {
+    if (highlightSummary && highlightSummary.value) {
+      const regex = /.{0,30}<span.*>.*<\/span.*>.{0,30}/g
+      const matches = highlightSummary.value.match(regex)
+      return `...${matches[0]}...`
+    } else {
+      return summary
+    }
   }
 }
