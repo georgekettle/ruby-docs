@@ -46,7 +46,10 @@
   <div>
     <h2 class="mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400">How to use</h2>
     <div>
-      <h3 class="text-xl font-medium tracking-tight dark:text-slate-200">Quick guide</h3>
+      <div class="flex items-center">
+        <h3 class="text-xl font-medium tracking-tight dark:text-slate-200">Quick guide</h3>
+        <%= render 'components/documentation/check_mark', text: "Official content" %>
+      </div>
       <div class="-mt-2">
         <%= @section.rubydocs_says %>
       </div>
