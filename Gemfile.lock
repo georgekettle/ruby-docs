@@ -97,6 +97,8 @@ GEM
     concurrent-ruby (1.1.10)
     connection_pool (2.3.0)
     crass (1.0.6)
+    cssbundling-rails (1.1.1)
+      railties (>= 6.0.0)
     dalli (3.2.2)
     dartsass-rails (0.4.0)
       railties (>= 6.0.0)
@@ -140,8 +142,6 @@ GEM
     faraday-rack (1.0.0)
     faraday-retry (1.0.3)
     ffi (1.15.5)
-    font-awesome-sass (6.2.0)
-      sassc (~> 2.0)
     get_process_mem (0.2.7)
       ffi (~> 1.0)
     globalid (1.0.0)
@@ -154,9 +154,6 @@ GEM
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
-    importmap-rails (1.1.5)
-      actionpack (>= 6.0.0)
-      railties (>= 6.0.0)
     io-console (0.5.11)
     irb (1.4.1)
       reline (>= 0.3.0)
@@ -264,8 +261,6 @@ GEM
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    sassc (2.4.0)
-      ffi (~> 1.9)
     selenium-webdriver (4.4.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -293,10 +288,6 @@ GEM
       railties (>= 6.0.0)
     stringio (3.0.2)
     strscan (3.0.4)
-    tailwindcss-rails (2.0.12-x86_64-darwin)
-      railties (>= 6.0.0)
-    tailwindcss-rails (2.0.12-x86_64-linux)
-      railties (>= 6.0.0)
     thor (1.2.1)
     time (0.2.0)
       date
@@ -338,19 +329,18 @@ DEPENDENCIES
   bootsnap
   bullet
   capybara
+  cssbundling-rails
   dalli
   dartsass-rails (~> 0.4.0)
   debug
   devise
   dotenv-rails
-  font-awesome-sass (~> 6.2.0)
   get_process_mem
   heroicon
   honeybadger
   image_processing (~> 1.2)
-  importmap-rails
   jbuilder
-  jsbundling-rails (~> 1.0)
+  jsbundling-rails
   loaf
   meta-tags
   nokogiri
@@ -368,7 +358,6 @@ DEPENDENCIES
   skylight
   sprockets-rails
   stimulus-rails
-  tailwindcss-rails
   turbo-rails
   tzinfo-data
   web-console

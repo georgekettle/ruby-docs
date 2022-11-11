@@ -2,6 +2,8 @@
 <html>
   <head>
     <%= render 'layouts/head' %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body class="bg-white dark:bg-gray-900">
