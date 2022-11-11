@@ -48,7 +48,31 @@
     <div>
       <div class="flex items-center">
         <h3 class="text-xl font-medium tracking-tight dark:text-slate-200">Quick guide</h3>
-        <%= render 'components/documentation/check_mark', text: "Official content" %>
+        <div data-controller="popover">
+          <%= render 'components/documentation/check_mark', text: "Official content" %>
+          <div data-popover-target="content" class="hidden">
+          <%= render 'components/popovers/container' do %>
+            <div class="flex">
+              <div class="shrink-0 pr-4">
+                <%= heroicon 'question-mark-circle', options: { class:"h-6 w-6 text-yellow-500 dark:text-yellow-400" } %>
+              </div>
+              <div class="space-y-4">
+                <div>
+                  <span class="text-md block font-medium mb-1.5 tracking-tight dark:text-white m-0">Official how?</span>
+                  <span class="block m-0 text-slate-600 dark:text-slate-400">I scraped all this data from the <%= link_to 'official documentation', 'http://www.ruby-doc.org', target: :_blank, class: "font-medium text-slate-900 border-b border-primary-500 hover:border-b-2 dark:text-white" %>. I created this site to make it easier for beginners and more pleasant for professionals to use Ruby.</span>
+                </div>
+                <div class="flex items-center mt-4">
+                  <img class="shrink-0 mr-2 inline-block h-8 w-8 rounded-full ring-1 ring-white" src="https://avatars.githubusercontent.com/u/34521157?s=60&v=4" alt="">
+                  <div>
+                    <p class="text-sm tracking-tight font-medium dark:text-slate-200">Georgie boy</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Creator of ruby-docs.org</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        </div>
       </div>
       <div class="-mt-2">
         <%= @section.rubydocs_says %>

@@ -17,6 +17,9 @@ application.register("dark", DarkController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import PopoverController from "./popover_controller"
+application.register("popover", PopoverController)
+
 import PortalController from "./portal_controller"
 application.register("portal", PortalController)
 
