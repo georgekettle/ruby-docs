@@ -27,6 +27,9 @@ gem "stimulus-rails"
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "cssbundling-rails"
 
+# Tailwind css [https://tailwindcss.com/docs/guides/ruby-on-rails]
+gem "tailwindcss-rails", "~> 2.0"
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
