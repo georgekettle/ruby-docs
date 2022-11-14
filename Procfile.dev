@@ -1,5 +1,5 @@
 web: bin/rails server -p 3000
 worker: bundle exec sidekiq
 js: yarn build --watch
-tailwind: yarn build:tailwind --watch
 css: yarn build:css --watch
+css: bin/rails tailwindcss:watch

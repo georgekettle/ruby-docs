@@ -3,11 +3,12 @@ const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   content: [
-    './app/views/**/*.html.erb',
+    './public/*.html',
+    './app/views/**/*.{erb,haml,html,slim}',
     './app/helpers/**/*.rb',
     './app/assets/stylesheets/**/*.css',
     './app/javascript/**/*.js',
-    './config/initializers/*.rb'
+    './config/initializers/*.rb',
   ],
   darkMode: 'class',
   theme: {
