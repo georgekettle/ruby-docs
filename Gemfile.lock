@@ -288,6 +288,10 @@ GEM
       railties (>= 6.0.0)
     stringio (3.0.2)
     strscan (3.0.4)
+    tailwindcss-rails (2.0.21-x86_64-darwin)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.0.21-x86_64-linux)
+      railties (>= 6.0.0)
     thor (1.2.1)
     time (0.2.0)
       date
@@ -358,6 +362,7 @@ DEPENDENCIES
   skylight
   sprockets-rails
   stimulus-rails
+  tailwindcss-rails (~> 2.0)
   turbo-rails
   tzinfo-data
   web-console
