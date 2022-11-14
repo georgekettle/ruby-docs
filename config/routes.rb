@@ -19,7 +19,9 @@ Rails.application.routes.draw do
     end
     resources :sections, only: [:new, :create]
   end
-  resources :sections, only: [:show, :edit, :update, :destroy]
+  resources :sections, only: [:show, :edit, :update, :destroy] do
+    resources :feedbacks, only: [:create]
+  end
 
   require "sidekiq/web"
   authenticate :user, ->(user) { user.admin? } do

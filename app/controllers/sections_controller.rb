@@ -10,6 +10,7 @@ class SectionsController < ApplicationController
     @version = Version.find_by_number(params[:version_number])
     @klass = Klass.find_by(name: klass_name, version: @version)
     @section = Section.find_by(name: section_name, category: section_category, klass: @klass) || not_found
+    @feedback = Feedback.new
     authorize @section
     breadcrumb "v#{@version.number}", version_path(@version)
     breadcrumb @klass.name, klass_path(@klass)
