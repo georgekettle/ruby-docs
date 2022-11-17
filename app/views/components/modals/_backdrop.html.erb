@@ -1,0 +1,12 @@
+<% width ||= 'xl' %>
+<% width_class = "max-w-#{width}" %>
+
+<div class="fixed z-50 inset-0" role="dialog" aria-modal="true">
+  <div data-action="click->portal#close" class="fixed inset-0 bg-black/20 backdrop-blur-sm dark:bg-slate-900/80" aria-hidden="true"></div>
+  <div class="fixed inset-0 flex justify-center items-end md:items-center p-4 lg:p-24 pointer-events-none">
+    <!-- Ensure tailwind includes these classes: max-w-xs max-w-sm max-w-md max-w-lg max-w-xl max-w-2xl max-w-3xl max-w-4xl max-w-5xl max-w-6xl max-w-7xl -->
+    <div class="<%= width_class %> mb-10 pointer-events-auto overflow-scroll w-full bg-white rounded-lg shadow-lg text-base text-slate-900 dark:bg-slate-800 dark:text-slate-400 dark:highlight-white/5">
+      <%= yield %>
+    </div>
+  </div>
+</div>
