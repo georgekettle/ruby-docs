@@ -1,7 +1,16 @@
 class FeedbacksController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create, :update]
   skip_after_action :verify_authorized, only: [:create, :update]
+  after_action :verify_authorized, only: :index
+  skip_after_action :verify_policy_scoped, only: :index
+  
   before_action :set_target, only: [:create]
+
+  def index
+    @dismissed = params[:dismissed] == 'true'
+    @feedbacks = Feedback.includes(target: :klass).where(dismissed: @dismissed)
+    authorize Feedback
+  end
 
   def create
     @feedback = Feedback.new(feedback_params)
@@ -22,9 +31,9 @@ class FeedbacksController < ApplicationController
     @target = @feedback.target
     respond_to do |format|
       if @feedback.update(feedback_params)
-        format.html { redirect_to @target, status: :see_other, notice: "Thanks for the feedback!" }
+        format.html { redirect_back fallback_location: @target, status: :see_other, notice: "Thanks for the feedback!" }
       else
-        format.html { redirect_to @target, status: :unprocessable_entity, alert: "Something went wrong while saving feedback" }
+        format.html { redirect_back fallback_location: @target, status: :unprocessable_entity, alert: "Something went wrong while saving feedback" }
       end
     end
   end
@@ -38,6 +47,6 @@ class FeedbacksController < ApplicationController
   end
 
   def feedback_params
-    params.require(:feedback).permit(:comment, :score)
+    params.require(:feedback).permit(:comment, :score, :dismissed)
   end
 end

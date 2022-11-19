@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :sections, only: [:show, :edit, :update, :destroy] do
     resources :feedbacks, only: [:create]
   end
-  resources :feedbacks, only: [:update]
+  resources :feedbacks, only: [:index, :update]
 
   require "sidekiq/web"
   authenticate :user, ->(user) { user.admin? } do

@@ -5,4 +5,6 @@ class Feedback < ApplicationRecord
   enum score: { negative: 0, positive: 1 }
 
   validates :comment, presence: true
+
+  default_scope { order(updated_at: :desc) }
 end
