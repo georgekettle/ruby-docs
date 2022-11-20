@@ -8,7 +8,7 @@ class FeedbacksController < ApplicationController
 
   def index
     @dismissed = params[:dismissed] == 'true'
-    @feedbacks = Feedback.includes(target: :klass).where(dismissed: @dismissed)
+    @feedbacks = Feedback.includes(:user, target: :klass).where(dismissed: @dismissed)
     authorize Feedback
   end
 

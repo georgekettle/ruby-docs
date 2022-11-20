@@ -5,13 +5,12 @@
   </div>
 </header>
 
-<div class="container max-w-2xl mx-auto">
-  <%# tabs %>
-  <div class="mb-8">
+<div class="container max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-8 pb-10">
+  <div class="md:col-span-1">
     <%= render 'tabs', dismissed: @dismissed %>
   </div>
 
-  <div class="grid gap-4">
+  <div class="grid gap-4 md:col-span-3 lg:col-span-4">
     <% @feedbacks.each do |feedback| %>
       <%= render feedback %>
     <% end %>

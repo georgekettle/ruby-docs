@@ -1,13 +1,13 @@
-<% active_classes = "bg-contrast-50 text-contrast-700 font-semibold h-10 px-6 rounded-lg flex items-center justify-center dark:bg-slate-800 dark:text-contrast-300" %>
-<% inactive_classes = "hover:bg-slate-100 hover:text-slate-900 text-slate-400 font-semibold h-10 px-6 rounded-lg flex items-center justify-center dark:hover:bg-slate-800 dark:hover:text-slate-200" %>
+<% active_classes = "bg-contrast-50 text-contrast-700 font-semibold h-10 px-6 rounded-lg flex items-center md:justify-start justify-center dark:bg-slate-800 dark:text-contrast-300" %>
+<% inactive_classes = "hover:bg-slate-100 hover:text-slate-900 text-slate-400 font-semibold h-10 px-6 rounded-lg flex items-center md:justify-start justify-center dark:hover:bg-slate-800 dark:hover:text-slate-200" %>
 
-<div class="flex items-center space-x-2">
+<div class="flex items-center space-x-2 md:block md:space-y-2 md:space-x-0">
   <%= link_to feedbacks_path(dismissed: false), class:"#{dismissed ? inactive_classes : active_classes}" do %>
-    <%= heroicon 'eye-slash', options: { class:"h-4 w-4 mr-2" } %>
+    <%= heroicon 'x-circle', options: { class:"h-4 w-4 mr-2" } %>
     Not read
   <% end %>
   <%= link_to feedbacks_path(dismissed: true), class:"#{dismissed ? active_classes : inactive_classes}" do %>
-    <%= heroicon 'eye', options: { class:"h-4 w-4 mr-2" } %>
-    Marked as read
+    <%= heroicon 'check-circle', options: { class:"h-4 w-4 mr-2" } %>
+    Read
   <% end %>
 </div>
