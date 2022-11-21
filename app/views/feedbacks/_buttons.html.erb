@@ -8,7 +8,10 @@
 
   <div data-portal-target="container" class="hidden">
     <%= render 'components/modals/backdrop', width: 'md' do %>
-      <div class="p-8 space-y-6">
+      <div class="p-8 space-y-6 relative">
+        <button data-action="click->portal#close" class="group p-2 rounded-full absolute top-6 right-6 text-slate-400 hover:text-slate-900 hover:bg-slate-50">
+          <%= heroicon 'x-mark', options: { class:"h-5 w-5 transition-all ease-in-out duration-200" } %>
+        </button>
         <div class="flex items-center justify-center bg-red-200 text-red-600 rounded-full h-10 w-10">
           <%= heroicon 'hand-thumb-down', options: { class:"h-5 w-5" } %>
         </div>
@@ -30,7 +33,10 @@
 
   <div data-portal-target="container" class="hidden">
     <%= render 'components/modals/backdrop', width: 'md' do %>
-      <div class="p-8 space-y-6">
+      <div class="p-8 space-y-6 relative">
+        <button data-action="click->portal#close" class="group p-2 rounded-full absolute top-6 right-6 text-slate-400 hover:text-slate-900 hover:bg-slate-50">
+          <%= heroicon 'x-mark', options: { class:"h-5 w-5 transition-all ease-in-out duration-200" } %>
+        </button>
         <div class="flex items-center justify-center bg-green-200 text-green-600 rounded-full h-10 w-10">
           <%= heroicon 'hand-thumb-up', options: { class:"h-5 w-5" } %>
         </div>
