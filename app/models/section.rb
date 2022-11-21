@@ -1,6 +1,7 @@
 class Section < ApplicationRecord
   include AlgoliaSearch
   include Searchable::ForSection # depends on AlgoliaSearch
+  include HasFeedback
   
   belongs_to :klass
   has_one :version, through: :klass

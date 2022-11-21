@@ -12,6 +12,9 @@
   >
     <div class="mt-1 py-2 w-40 rounded-lg bg-white shadow ring-1 ring-slate-900/5 text-sm leading-6 font-semibold text-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:highlight-white/5">
       <% if user_signed_in? %>
+        <% if policy(Feedback).index? %>
+          <%= link_to "Feedback", feedbacks_path, class: "w-full text-left text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:text-gray-100" %>
+        <% end %>
         <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "w-full text-left text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:text-gray-100" %>
       <% else %>
         <%= link_to "Create account", new_user_registration_path, class: "text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:text-gray-100" %>

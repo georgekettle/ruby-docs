@@ -1,0 +1,18 @@
+<header id="header" class="relative z-20 py-24">
+  <div class="flex items-center flex-col">
+    <h1 class="inline-block text-center text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight dark:text-slate-200">Feedback</h1>
+    <p class="mt-2 text-lg text-slate-700 dark:text-slate-400">This is how we can improve 💪</p>
+  </div>
+</header>
+
+<div class="container max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-8 pb-10">
+  <div class="md:col-span-1">
+    <%= render 'tabs', dismissed: @dismissed %>
+  </div>
+
+  <div class="grid gap-4 md:col-span-3 lg:col-span-4">
+    <% @feedbacks.each do |feedback| %>
+      <%= render feedback %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<%= turbo_frame_tag dom_id(feedback) do %>
+  <div class="group bg-white overflow-hidden border border-slate-200 rounded-xl shadow-sm transition-all duration-300 ease-out hover:border-slate-200 dark:bg-slate-800 dark:highlight-white/5 dark:border-slate-800">
+    <div class="space-y-4 p-6 md:p-8">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2 text-slate-400 text-sm">
+          <% if feedback.positive? %>
+            <div class="inline-flex items-center rounded-full text-xs font-medium p-2 bg-green-100 text-green-600">
+              <%= heroicon 'hand-thumb-up', options: { class:"h-3 w-3" } %>
+            </div>
+          <% else %>
+            <div class="inline-flex items-center rounded-full text-xs font-medium p-2 bg-red-100 text-red-600">
+              <%= heroicon 'hand-thumb-down', options: { class:"h-3 w-3" } %>
+            </div>
+          <% end %>
+          <span>•</span>
+          <% if feedback.user %>
+            <span><%= feedback.user.email %></span>
+          <% else %>
+            <span>Anonymous</span>
+          <% end %>
+          <span>•</span>
+          <%= link_to "#{feedback.target.klass.name} #{feedback.target.formatted_name}", feedback.target, class: 'hover:text-slate-900 hover:underline dark:hover:text-slate-200' %>
+        </div>
+        <div class="items-center hidden md:flex opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
+          <% if feedback.dismissed? %>
+            <%= link_to feedback_path(feedback, feedback: { dismissed: false }), data: {turbo_method: :patch}, class:'flex items-center text-sm bg-primary-500 text-white px-2 py-1 rounded' do %>
+              <%= heroicon 'x-circle', options: { class:"h-4 w-4" } %>
+              <span class="ml-2">Mark as unread</span>
+            <% end %>
+          <% else %>
+            <%= link_to feedback_path(feedback, feedback: { dismissed: true }), data: {turbo_method: :patch}, class:'flex items-center text-sm bg-primary-500 text-white px-2 py-1 rounded' do %>
+              <%= heroicon 'check-circle', options: { class:"h-4 w-4" } %>
+              <span class="ml-2">Mark as read</span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <p class='dark:text-slate-200'><%= feedback.comment %></p>
+    </div>
+    <div class="md:hidden">
+      <% if feedback.dismissed? %>
+        <%= link_to feedback_path(feedback, feedback: { dismissed: false }), data: {turbo_method: :patch}, class:'flex items-center justify-center font-medium bg-slate-100 dark:bg-slate-700 dark:hover:bg-slate-600 hover:bg-slate-800 text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 hover:text-white px-3 py-2' do %>
+          <%= heroicon 'x-circle', options: { class:"h-4 w-4" } %>
+          <span class="ml-2">Mark as unread</span>
+        <% end %>
+      <% else %>
+        <%= link_to feedback_path(feedback, feedback: { dismissed: true }), data: {turbo_method: :patch}, class:'flex items-center justify-center font-medium bg-slate-100 dark:bg-slate-700 dark:hover:bg-slate-600 hover:bg-slate-800 text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 hover:text-white px-3 py-2' do %>
+          <%= heroicon 'check-circle', options: { class:"h-4 w-4" } %>
+          <span class="ml-2">Mark as read</span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
